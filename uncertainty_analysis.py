@@ -20,55 +20,37 @@ import pandas as pd
 import csv
 import PySAM.ResourceTools as tools  # MOVE BACK TO FILES FOLDER
 editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
-editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()
-folder_path = os.path.join(sys.path[0])+'\Scenario Generation'
+editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
 city = editable_data['city']
+folder_path = os.path.join(sys.path[0])+str(city)
+save_path = os.path.join(sys.path[0])+str(city)+'/uncertainty_analysis'
+if not os.path.exists(save_path):
+    os.makedirs(save_path)
 #Location Coordinates
 lat = float(editable_data['Latitude'])
 lon = float(editable_data['Longitude'])
 
 weather_data = {}
-DNI = {}
-DHI = {}
-GHI = {}
-GTI = {}
-wind_speed = {}
-def uncertain_input():
-    GTI_dist =  defaultdict(list)
-    wind_speed_dist =  defaultdict(list)
+def uncertain_input(type_input,number_weatherfile):
+    uncertain_dist =  defaultdict(list)
+    uncertain_input = {}
     for year in range(int(editable_data['starting_year']),int(editable_data['ending_year'])+1):
         weather_data[year] = pd.read_csv(folder_path+city+'_'+str(lat)+'_'+str(lon)+'_psm3_60_'+str(year)+'.csv', header=None)[2:]
-        #DNI[year] = weather_data[year][5]
-        #DHI[year] = weather_data[year][6]
-        #GHI[year] = weather_data[year][7]
-        GTI[year] = weather_data[year][46]
-        wind_speed[year] = weather_data[year][13]
+        uncertain_input[year] = weather_data[year][number_weatherfile]
         for index_in_year in range(2,8762):
-            #DNI_dist[day][hour].append(float(DNI[year][index_in_year]))
-            #DHI_dist[day][hour].append(float(DHI[year][index_in_year]))
-            #GHI_dist[day][hour].append(float(GHI[year][index_in_year]))
-            GTI_dist[index_in_year-2].append(float(GTI[year][index_in_year]))
-            wind_speed_dist[index_in_year-2].append(float(wind_speed[year][index_in_year]))
-    #uncertain_inputs = [DNI_dist,DHI_dist,GHI_dist,wind_speed_dist]
-    uncertain_inputs = [GTI_dist,wind_speed_dist]
-    return uncertain_inputs
+            uncertain_dist[index_in_year-2].append(float(uncertain_input[year][index_in_year]))
+    return uncertain_dist
 def uncertain_input_plot(uncertain_name,uncertain_dist):
     for day in days:
         for hour in range(24):
             plt.hist(uncertain_dist[day][hour])
             plt.title(uncertain_name+' in ' +str(year)+'/'+str(month)+'/'+str(day)+' at '+str(hour))
-            output_path =os.path.join(folder_path+'uncertainty_analysis/'+uncertain_name+str(year)+'_'+str(month)+'_'+str(day)+'_'+str(hour)+ '.png')
+            output_path =os.path.join(save_path+uncertain_name+str(year)+'_'+str(month)+'_'+str(day)+'_'+str(hour)+ '.png')
             plt.savefig(output_path,dpi=300)
             plt.close()
     return uncertain_inputs
-#uncertain_inputs = uncertain_input()
-#uncertain_input_plot('DNI',uncertain_inputs[0])
-#Finding the best distribution
-uncertain_inputs= uncertain_input()
-
 matplotlib.rcParams['figure.figsize'] = (16.0, 12.0)
 matplotlib.style.use('ggplot')
-
 # Create models from data
 def best_fit_distribution(data,  ax=None):
   """Model data by finding best fit distribution to data"""
@@ -148,12 +130,9 @@ def to_percent(nplt,position, k):
         return s + r'$\%$'
     else:
         return s + '%'
-# Plot for comparison
-#ax_new = plt.hist(data, bins = 'auto', range=(min(data)*0.8,max(data)*1.1), density= True)
-#plt.close()
-
 # Find best fit distribution
-def probability_distribution(dict_data, name):
+def probability_distribution(name,column_number):
+    dict_data = uncertain_input(name,column_number)
     best_fit_input = defaultdict(list)
     df_object = {}
     df_object_all  = pd.DataFrame(columns = ['Index in year','Best fit','Best loc','Best scale','Mean','STD'])
@@ -172,7 +151,3 @@ def probability_distribution(dict_data, name):
         df_object[key] =  pd.DataFrame(data_frame_input,index=[0])
         df_object_all =  df_object_all.append(df_object[key])
     df_object_all.to_csv(folder_path + '/best_fit_'+name+'.csv')
-probability_distribution(uncertain_inputs[1],'wind_speed')
-#best_dist = getattr(st, best_fit_name)
-#fit_and_plot(best_dist, data,min(data)*0.8,max(data)*1.1)
-#plt.show()
