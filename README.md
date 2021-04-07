@@ -3,3 +3,9 @@ This repository provides a framework to perform two-stage stochastic programming
 
 To run the two-stage stochastic optimization, you should directly complile the main_twostage_SP.py file. The input data should be entered using the EditableFile.csv. The EditableFile.csv file has four columns: the names of each row, the value of each row that will be used in the framework, the instruction of each row that helps to undesrtand why the user needs to fill this value, and in what stage of the framework this row is used.
 
+#Installing the needed packages
+To install the required packages to run the framework:
+
+pip install -r  requirements.txt
+
+conda install -c conda-forge scikit-learn-extra
