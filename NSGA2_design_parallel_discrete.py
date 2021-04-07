@@ -23,7 +23,7 @@ solar_component = pd.read_csv(components_path+'solar_PV.csv')
 renewable_percentage = float(editable_data['renewable percentage'])  #Amount of renewables at the U (100% --> 1, 46.3%, and 29%)
 
 ###System Parameters## #
-city = editable_data['city']
+city = '/'+editable_data['city']
 year = int(editable_data['ending_year'])
 CP_NG = int(editable_data['CP_ng']) #The heat content of  natural gas is 1,037 Btu per cubic foot
 BTUtokWh_convert = 0.000293071 # 1BTU = 0.000293071 kWh
@@ -69,8 +69,8 @@ class TwoStageOpt(Problem):
         operating_cost_initialized = self.operating_cost(self.A_solar,self.A_swept,self.CAP_CHP_elect,self.CAP_boiler,self.CAP_battery)
         solution.objectives[:] = [operating_cost_initialized[0],operating_cost_initialized[1]]
         solution.constraints[0] = self.CHP(self.CAP_CHP_elect,0)[6] + self.CAP_boiler - represent_day_max_results[1]
-        if (self.CHP(self.CAP_CHP_elect,0)[6] + self.CAP_boiler - represent_day_max_results[1])<0:
-            print('constraint error')
+        #if (self.CHP(self.CAP_CHP_elect,0)[6] + self.CAP_boiler - represent_day_max_results[1])<0:
+        #    print('constraint error')
     def operating_cost(self,_A_solar,_A_swept,_CAP_CHP_elect,_CAP_boiler,_CAP_battery):
         A_swept = _A_swept #Swept area of rotor m^2
         A_solar = _A_solar #Solar durface m^2 --> gives 160*A_solar W solar & needs= A_solar/0.7 m^2 rooftop
@@ -135,10 +135,10 @@ class TwoStageOpt(Problem):
             opt = SolverFactory('glpk')
             results =opt.solve(model,load_solutions=False)
             if len(results.solution)==0:
-                print('ERROR')
-                print('demands',_electricity_demand,_heating_demand)
-                print('sizing',A_swept,A_solar,CAP_CHP_elect,CAP_boiler,CAP_battery)
-                print(self.CHP(CAP_CHP_elect,0)[6] +self.NG_boiler(0,CAP_boiler)[4]*CAP_boiler)
+                #print('ERROR')
+                #print('demands',_electricity_demand,_heating_demand)
+                #print('sizing',A_swept,A_solar,CAP_CHP_elect,CAP_boiler,CAP_battery)
+                #print(self.CHP(CAP_CHP_elect,0)[6] +self.NG_boiler(0,CAP_boiler)[4]*CAP_boiler)
                 #print('results',results.objectives)
                 #print('results',results)
                 #print('here',self.CHP(self.CAP_CHP_elect,0)[6] ,self.NG_boiler(0,self.CAP_boiler)[4]*self.CAP_boiler)
@@ -309,8 +309,9 @@ def results_extraction(problem, algorithm):
         if isinstance(battery_results[s], list):
             battery_results[s] = float(problem.types[4].decode(battery_results[s]))
             battery_results[s]=battery_component['CAP_battery (kWh)'][battery_results[s]]
-        print(i,'variable',solar_results[s],wind_results[s],CHP_results[s],boiler_results[s],battery_results[s])
-        print(i,'objective',s.objectives[0],s.objectives[1])
+        print('Generating the results')
+        print('Scenario: ',i,'variable',solar_results[s],wind_results[s],CHP_results[s],boiler_results[s],battery_results[s])
+        print('Scenario: ',i,'objective',s.objectives[0],s.objectives[1])
         data_object = {'Pareto number':i,
         'Cost ($)':s.objectives[0],
         'Emission (kg CO2)':s.objectives[1]}

@@ -8,7 +8,7 @@ import sys
 
 editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-city = editable_data['city']
+city = '/'+editable_data['city']
 folder_path = os.path.join(sys.path[0])+str(city)
 save_path = os.path.join(sys.path[0]) + str('\Scenario Generation')
 if not os.path.exists(save_path):

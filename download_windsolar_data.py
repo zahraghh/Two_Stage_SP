@@ -5,7 +5,7 @@ import csv
 import PySAM.ResourceTools as tools  # MOVE BACK TO FILES FOLDER
 def download_meta_data(city):
     editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
-    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()
+    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
     save_path = os.path.join(sys.path[0])+str(city)
     if not os.path.exists(save_path):
         os.makedirs(save_path)
@@ -39,7 +39,11 @@ def download_meta_data(city):
     # Your email address
     your_email = sam_email
     # Please join our mailing list so we can keep you up-to-date on new developments.
-    mailing_list = editable_data['mailing_list'].lower()
+    mailing_list = editable_data['mailing_list']
+    if mailing_list=='yes':
+        mailing_list='true'
+    else:
+        mailing_list='false'
     for year in range(int(editable_data['starting_year']),int(editable_data['ending_year'])+1):
         # Declare url string
         url = 'https://developer.nrel.gov/api/solar/nsrdb_psm3_download.csv?wkt=POINT({lon}%20{lat})&names={year}&leap_day={leap}&interval={interval}&utc={utc}&full_name={name}&email={email}&affiliation={affiliation}&mailing_list={mailing_list}&reason={reason}&api_key={api}&attributes={attr}'.format(year=year, lat=lat, lon=lon, leap=leap_year, interval=interval, utc=utc, name=your_name, email=your_email, mailing_list=mailing_list, affiliation=your_affiliation, reason=reason_for_use, api=api_key, attr=attributes)

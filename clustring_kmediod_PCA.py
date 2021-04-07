@@ -24,7 +24,7 @@ def kmedoid_clusters():
     representative_days_path =  save_path+str('\Representative days')
     if not os.path.exists(representative_days_path):
         os.makedirs(representative_days_path)
-    city = editable_data['city']
+    city = '/'+editable_data['city']
     folder_path = os.path.join(sys.path[0])+str(city)
     GTI_distribution = pd.read_csv(folder_path+'/best_fit_GTI.csv')
     wind_speed_distribution = pd.read_csv(folder_path+'/best_fit_wind_speed.csv')
@@ -131,17 +131,21 @@ def kmedoid_clusters():
     pca = PCA(n_components=int(editable_data['PCA numbers']))
     principalComponents = pca.fit(A_scaled)
     scores_pca = pca.transform(A_scaled)
-    #print('score',scores_pca)
-    #print(pca.explained_variance_ratio_)
+    #print('Score of features', scores_pca)
+    print('Explained variance ratio',pca.explained_variance_ratio_)
     # Plot the explained variances
     features = range(pca.n_components_)
     search_optimum_feature= editable_data['Search optimum PCA']
     if search_optimum_feature == 1:
+        print('Defining the optimum number of features in the PCA method: ')
         plt.bar(features, pca.explained_variance_ratio_.cumsum(), color='black')
         plt.xlabel('PCA features')
         plt.ylabel('Cumulative explained variance')
         plt.xticks(features)
-        plt.show()
+        plt.savefig(os.path.join(sys.path[0]) + 'Optimum number of features in PCA.png',dpi=300)
+        plt.close()
+        print('"Optimum number of features in PCA" figure is saved in the directory')
+        print('You can use the figure to select the optimum number of features' )
         plt.close()
     # Save components to a DataFrame
     PCA_components = pd.DataFrame(scores_pca)
@@ -149,17 +153,20 @@ def kmedoid_clusters():
     search_optimum_cluster = editable_data['Search optimum clusters'] # if I want to search for the optimum number of clusters: 1 is yes, 0 is no
     cluster_range = range(2,20,1)
     if search_optimum_cluster=='yes':
+        print('Defining the optimum number of clusters: ')
         for cluster_numbers in cluster_range:
             kmedoids = KMedoids(n_clusters=cluster_numbers, init="random",max_iter=1000,random_state=0).fit(scores_pca)
             inertia_list.append(kmedoids.inertia_)
             plt.scatter(cluster_numbers,kmedoids.inertia_)
             plt.xlabel('Number of clusters')
             plt.ylabel('Sum of inertia of clusters')
-            print(cluster_numbers,kmedoids.inertia_)
+            print('Cluster number: ', cluster_numbers, 'Inertia of the cluster: ', int(kmedoids.inertia_))
         plt.plot(list(cluster_range),inertia_list)
         plt.xticks(np.arange(2,20,1))
-        plt.show()
+        plt.savefig(os.path.join(sys.path[0]) + 'Optimum number of clusters.png',dpi=300)
         plt.close()
+        print('"Optimum number of clusters" figure is saved in the directory')
+        print('You can use the figure to select the optimum number of clusters' )
     cluster_numbers= int(editable_data['Cluster numbers'])
     kmedoids_org = KMedoids(n_clusters=cluster_numbers, init="random",max_iter=1000,random_state=4).fit(A)
     kmedoids = KMedoids(n_clusters=cluster_numbers, init="random",max_iter=1000,random_state=4).fit(scores_pca)
