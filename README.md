@@ -5,7 +5,8 @@ To run the two-stage stochastic optimization, you should directly complile the m
 
 #Installing the needed packages
 To install the required packages to run the framework:
-
+```
 pip install -r  requirements.txt
 
 conda install -c conda-forge scikit-learn-extra
+```
