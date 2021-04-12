@@ -14,7 +14,7 @@ solar_azimuth,180,Azimuth degree of solar panels,Weather data analysis
 starting_year,1998,The first available year from NSRDB database,Weather data analysis
 ending_year,2019,The last available year from NSRDB database,Weather data analysis
 your_name,,"Add your name without space (e.g., Zahra+Ghaemi)",Weather data download from  the National Solar Radiation Database (NSRDB)
-reason_for_use,,Add the reason you want to download the meteorological data (e.g. Academic),Weather data download from  the National Solar Radiation Database (NSRDB)
+reason_for_use,,Add the reason you want to download the meteorological data (e.g., Academic),Weather data download from  the National Solar Radiation Database (NSRDB)
 your_affiliation,,"Add your affiliation without space (e.g., University+of+Utah)",Weather data download from  the National Solar Radiation Database (NSRDB)
 your_email,,Add your email address,Weather data download from  the National Solar Radiation Database (NSRDB)
 mailing_list,yes,Do you want to be added to NSRDB  mailing list? ,Weather data download from  the National Solar Radiation Database (NSRDB)
