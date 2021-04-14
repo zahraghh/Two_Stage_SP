@@ -18,7 +18,7 @@ import os
 import sys
 import pandas as pd
 import csv
-import PySAM.ResourceTools as tools  # MOVE BACK TO FILES FOLDER
+import PySAM.ResourceTools as tools
 editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
 city = '/'+editable_data['city']

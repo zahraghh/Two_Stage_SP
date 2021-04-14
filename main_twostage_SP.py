@@ -16,6 +16,7 @@ from pyomo.opt import SolverFactory
 editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
 city_DES ='/'+ str(editable_data['city'])
+state = editable_data['State']
 if __name__ == '__main__':
     #Do we need to generate the meteorlogical data and their distributions?
     if editable_data['Weather data download and analysis']=='yes':
@@ -31,7 +32,7 @@ if __name__ == '__main__':
     #energy demands,solar irradiance, wind speed, and electricity emissions?
     if editable_data['Generate Scenarios']=='yes':
         print('Generate scenarios for uncertain variables')
-        scenario_generation.scenario_generation()
+        scenario_generation.scenario_generation(state)
     if editable_data['Perfrom scenario reduction']=='yes':
         print('Perfrom scenarios reduction using k-medoid algorithm')
         clustring_kmediod_PCA.kmedoid_clusters()

@@ -5,7 +5,7 @@ from collections import defaultdict
 from scipy import stats
 import os
 import sys
-
+import EGEF
 editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
 city = '/'+editable_data['city']
@@ -14,12 +14,9 @@ save_path = os.path.join(sys.path[0]) + str('\Scenario Generation')
 if not os.path.exists(save_path):
     os.makedirs(save_path)
 lbstokg_convert = 0.453592 #1 lb = 0.453592 kg
-def scenario_generation():
+def scenario_generation(state=None):
     #Normal distribution for electricity emissions
     city_EF = int(editable_data['city EF'])
-    electricity_EF = city_EF*lbstokg_convert/1000
-    electricity_EF_high = (city_EF+1.732051*154)*lbstokg_convert/1000
-    electricity_EF_low = (city_EF-1.732051*154)*lbstokg_convert/1000
     lat = float(editable_data['Latitude'])
     lon = float(editable_data['Longitude'])
     year = int(editable_data['ending_year']) #Getting the last year of wind and solar data from NSRDB
@@ -38,6 +35,28 @@ def scenario_generation():
     heating_scenario = defaultdict(list)
     cooling_scenario = defaultdict(list)
     electricity_emissions_scenario = defaultdict(list)
+    loc = city_EF*lbstokg_convert/1000
+    if state is None:
+        EGEF_data = []
+        EGEF_data[0]='norm'
+        scale = 0.1*loc
+    else:
+        EGEF_data = EGEF.best_fit_distribution(EGEF.EGEF_state(state))
+        scale = EGEF_data[1][1]*lbstokg_convert/1000
+    if EGEF_data[0] == 'norm':
+        electricity_emissions_scenario['low'] = 8760*[-1.732051*scale+loc]
+        electricity_emissions_scenario['medium'] = 8760*[loc]
+        electricity_emissions_scenario['high'] = 8760*[1.732051*scale+loc]
+    ## If Solar GTI is uniform: from Rice & Miller low = 0.112702 (i - loc)/scale
+    elif EGEF_data[0] == 'uniform':
+        electricity_emissions_scenario['low'] = 8760*[0.112702*scale+loc]
+        electricity_emissions_scenario['medium'] = 8760*[0.5*scale+loc]
+        electricity_emissions_scenario['high'] = 8760*[0.887298*scale+loc]
+    ## If Solar GTI is expon: from Rice & Miller low = 0.415775 (i - loc)/scale, scale/scale)
+    elif EGEF_data[0] == 'expon':
+        electricity_emissions_scenario['low']= 8760*[0.415775*scale+loc]
+        electricity_emissions_scenario['medium']= 8760*[2.294280*scale+loc]
+        electricity_emissions_scenario['high']= 8760*[6.289945*scale+loc]
     for i in range(8760):
         #Energy demnad uses uniform distribution from AEO 2021 --> 3-point approximation
         ## Energy Demand
@@ -104,9 +123,6 @@ def scenario_generation():
             wind_scenario['low'].append(0.415775*scale+loc)
             wind_scenario['medium'].append(2.294280*scale+loc)
             wind_scenario['high'].append(6.289945*scale+loc)
-    electricity_emissions_scenario['low'] = 8760*[electricity_EF_low]
-    electricity_emissions_scenario['medium'] = 8760*[electricity_EF]
-    electricity_emissions_scenario['high'] = 8760*[electricity_EF_high]
     range_data = ['low','medium','high']
     scenario_genrated = {}
     scenario_genrated_normalized = {}
