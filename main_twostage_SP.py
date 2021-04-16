@@ -3,12 +3,15 @@ import os
 import sys
 import pandas as pd
 import csv
+import error_evaluation
+error_evaluation.errors()
 import download_windsolar_data as download_data
 import GTI
 import uncertainty_analysis
 import scenario_generation
 import clustring_kmediod_PCA
 import NSGA2_design_parallel_discrete as two_stage
+import plot_results_design
 from platypus import NSGAII, Problem, Real, Integer, InjectedPopulation,GAOperator,HUX, BitFlip, SBX,PM,PCX,nondominated,ProcessPoolEvaluator
 # I use platypus library to solve the muli-objective optimization problem:
 # https://platypus.readthedocs.io/en/latest/getting-started.html
@@ -33,9 +36,12 @@ if __name__ == '__main__':
     if editable_data['Generate Scenarios']=='yes':
         print('Generate scenarios for uncertain variables')
         scenario_generation.scenario_generation(state)
+    #Do we need to reduce the number scenarios of scenarios in ...
+    #using the PCA and k-medoid algorithm?
     if editable_data['Perfrom scenario reduction']=='yes':
         print('Perfrom scenarios reduction using k-medoid algorithm')
         clustring_kmediod_PCA.kmedoid_clusters()
+    #Do we need to perfrom the two stage stochastic programming using NSGA-II?
     if editable_data['Perform two stage optimization']=='yes':
         print('Perfrom two-stage stochastic optimization')
         problem= two_stage.TwoStageOpt()
@@ -43,3 +49,10 @@ if __name__ == '__main__':
             algorithm = NSGAII(problem,population_size=int(editable_data['population_size']) ,evaluator=evaluator,variator=GAOperator(HUX(), BitFlip()))
             algorithm.run(int(editable_data['num_iterations']))
         two_stage.results_extraction(problem, algorithm)
+    #Do we need to generate Pareto-front and parallel coordinates plots for the results?
+    if editable_data['Visualizing the final results']=='yes':
+        plot_results_design.ParetoFront_EFs()
+        plot_results_design.parallel_plots('cost')
+        plot_results_design.parallel_plots('emissions')
+        file_name = '/Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors/'
+        print('Plots are generated in the '+ file_name+' folder')

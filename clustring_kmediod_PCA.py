@@ -132,22 +132,38 @@ def kmedoid_clusters():
     principalComponents = pca.fit(A_scaled)
     scores_pca = pca.transform(A_scaled)
     #print('Score of features', scores_pca)
-    print('Explained variance ratio',pca.explained_variance_ratio_)
+    #print('Explained variance ratio',pca.explained_variance_ratio_)
     # Plot the explained variances
+    # Save components to a DataFrame
     features = range(pca.n_components_)
     search_optimum_feature= editable_data['Search optimum PCA']
-    if search_optimum_feature == 1:
+    SMALL_SIZE = 12
+    MEDIUM_SIZE = 14
+    BIGGER_SIZE = 16
+    plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
+    plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
+    plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+    plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+    plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+    plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
+    plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
+    plt.rcParams['axes.facecolor'] = 'white'
+    plt.rcParams['axes.grid'] = False
+    plt.rcParams['axes.edgecolor'] = 'black'
+    if search_optimum_feature == 'yes':
         print('Defining the optimum number of features in the PCA method: ')
         plt.bar(features, pca.explained_variance_ratio_.cumsum(), color='black')
         plt.xlabel('PCA features')
         plt.ylabel('Cumulative explained variance')
         plt.xticks(features)
-        plt.savefig(os.path.join(sys.path[0]) + 'Optimum number of features in PCA.png',dpi=300)
+        plt.title('The user should set a limit on the explained variance value and select the optimum number of PCA features')
+        plt.savefig(os.path.join(sys.path[0]) + '\Explained variance vs PCA features.png',dpi=300)
         plt.close()
-        print('"Optimum number of features in PCA" figure is saved in the directory')
+        print('"Explained variance vs PCA features" figure is saved in the directory')
         print('You can use the figure to select the optimum number of features' )
+        print('You should enter the new optimum number of features in EditableFile.csv file and re-run this part')
         plt.close()
-    # Save components to a DataFrame
+
     PCA_components = pd.DataFrame(scores_pca)
     inertia_list = []
     search_optimum_cluster = editable_data['Search optimum clusters'] # if I want to search for the optimum number of clusters: 1 is yes, 0 is no
@@ -159,14 +175,17 @@ def kmedoid_clusters():
             inertia_list.append(kmedoids.inertia_)
             plt.scatter(cluster_numbers,kmedoids.inertia_)
             plt.xlabel('Number of clusters')
-            plt.ylabel('Sum of inertia of clusters')
+            plt.ylabel('Inertia')
+            plt.tilte('The user should use "Elbow method" to select the number of optimum clusters')
             print('Cluster number: ', cluster_numbers, 'Inertia of the cluster: ', int(kmedoids.inertia_))
         plt.plot(list(cluster_range),inertia_list)
         plt.xticks(np.arange(2,20,1))
-        plt.savefig(os.path.join(sys.path[0]) + 'Optimum number of clusters.png',dpi=300)
+        plt.savefig(os.path.join(sys.path[0]) + '\Inertia vs Clusters.png',dpi=300)
         plt.close()
-        print('"Optimum number of clusters" figure is saved in the directory')
+        print('"Inertia vs Clusters" figure is saved in the directory')
         print('You can use the figure to select the optimum number of clusters' )
+        print('You should enter the new optimum number of clusters in EditableFile.csv file and re-run this part')
+
     cluster_numbers= int(editable_data['Cluster numbers'])
     kmedoids_org = KMedoids(n_clusters=cluster_numbers, init="random",max_iter=1000,random_state=4).fit(A)
     kmedoids = KMedoids(n_clusters=cluster_numbers, init="random",max_iter=1000,random_state=4).fit(scores_pca)

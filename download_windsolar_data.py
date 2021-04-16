@@ -2,7 +2,7 @@ import os
 import sys
 import pandas as pd
 import csv
-import PySAM.ResourceTools as tools  # MOVE BACK TO FILES FOLDER
+import PySAM.ResourceTools as tools
 def download_meta_data(city):
     editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
     editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
@@ -48,7 +48,12 @@ def download_meta_data(city):
         # Declare url string
         url = 'https://developer.nrel.gov/api/solar/nsrdb_psm3_download.csv?wkt=POINT({lon}%20{lat})&names={year}&leap_day={leap}&interval={interval}&utc={utc}&full_name={name}&email={email}&affiliation={affiliation}&mailing_list={mailing_list}&reason={reason}&api_key={api}&attributes={attr}'.format(year=year, lat=lat, lon=lon, leap=leap_year, interval=interval, utc=utc, name=your_name, email=your_email, mailing_list=mailing_list, affiliation=your_affiliation, reason=reason_for_use, api=api_key, attr=attributes)
         # Return just the first 2 lines to get metadata:
-        info = pd.read_csv(url)
-        info_name =city+'_'+str(lat)+'_'+str(lon)+'_psm3_60_'+str(year)+'.csv'
-        info.to_csv(save_path+info_name, index = False)
-        print('Downlaoding meteorlogical data of '+city+' in '+str(year))
+        try:
+            info = pd.read_csv(url)
+            info_name =city+'_'+str(lat)+'_'+str(lon)+'_psm3_60_'+str(year)+'.csv'
+            info.to_csv(save_path+info_name, index = False)
+            print('Downlaoding meteorlogical data of '+city+' in '+str(year))
+        except:
+            print('ERROR bad request: Data cannnot be downloaded from NSRDB')
+            print('Please, check values of 16 ("Longitude") to 23 ("SAM API key") rows in EditableFile.csv file')
+            sys.exit()

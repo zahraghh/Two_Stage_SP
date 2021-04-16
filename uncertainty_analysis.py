@@ -23,9 +23,6 @@ editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
 city = '/'+editable_data['city']
 folder_path = os.path.join(sys.path[0])+str(city)
-save_path = os.path.join(sys.path[0])+str(city)+'/uncertainty_analysis'
-if not os.path.exists(save_path):
-    os.makedirs(save_path)
 #Location Coordinates
 lat = float(editable_data['Latitude'])
 lon = float(editable_data['Longitude'])
@@ -40,15 +37,7 @@ def uncertain_input(type_input,number_weatherfile):
         for index_in_year in range(2,8762):
             uncertain_dist[index_in_year-2].append(float(uncertain_input[year][index_in_year]))
     return uncertain_dist
-def uncertain_input_plot(uncertain_name,uncertain_dist):
-    for day in days:
-        for hour in range(24):
-            plt.hist(uncertain_dist[day][hour])
-            plt.title(uncertain_name+' in ' +str(year)+'/'+str(month)+'/'+str(day)+' at '+str(hour))
-            output_path =os.path.join(save_path+uncertain_name+str(year)+'_'+str(month)+'_'+str(day)+'_'+str(hour)+ '.png')
-            plt.savefig(output_path,dpi=300)
-            plt.close()
-    return uncertain_inputs
+
 matplotlib.rcParams['figure.figsize'] = (16.0, 12.0)
 matplotlib.style.use('ggplot')
 # Create models from data

@@ -331,12 +331,11 @@ def results_extraction(problem, algorithm):
         i += 1
     df_object_all.to_csv(results_path + '/objectives.csv')
     df_operation_all.to_csv(results_path + '/sizing_all.csv')
-    df_cost_all.to_csv(results_path + '/cost_all.csv')
+    #df_cost_all.to_csv(results_path + '/cost_all.csv')
 
     plt.scatter([s.objectives[0] for s in algorithm.result],
                 [s.objectives[1] for s in algorithm.result])
     plt.xlabel("Cost ($)")
     plt.ylabel("Emissions kg ($CO_2$)")
-    plt.savefig(results_path + '/operation.png',dpi=300)
     plt.close()
     print('Results are generated in the '+ file_name+' folder')
