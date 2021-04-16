@@ -27,7 +27,7 @@ sys.path.insert(0, components_path)
 import battery
 import boilers
 import solar_PV
-import CHP
+import CHP_system
 import wind_turbine
 sys.path.remove(components_path)
 renewable_percentage = float(editable_data['renewable percentage'])  #Amount of renewables at the U (100% --> 1,mix of 43% grid--> 0.463, mix of 29% grid--> 0.29, 100% renewables -->0)
@@ -109,7 +109,7 @@ class TwoStageOpt(Problem):
             self.CAP_battery = 0
         operating_cost_initialized = self.operating_cost(self.A_solar,self.A_swept,self.CAP_CHP_elect,self.CAP_boiler,self.CAP_battery)
         solution.objectives[:] = [operating_cost_initialized[0],operating_cost_initialized[1]]
-        solution.constraints[0] = CHP.CHP(self.CAP_CHP_elect,0)[6] + self.CAP_boiler - represent_day_max_results[1]
+        solution.constraints[0] = CHP_system.CHP(self.CAP_CHP_elect,0)[6] + self.CAP_boiler - represent_day_max_results[1]
     def operating_cost(self,_A_solar,_A_swept,_CAP_CHP_elect,_CAP_boiler,_CAP_battery):
         A_swept = _A_swept #Swept area of rotor m^2
         A_solar = _A_solar #Solar durface m^2 --> gives 160*A_solar W solar & needs= A_solar/0.7 m^2 rooftop
@@ -148,9 +148,9 @@ class TwoStageOpt(Problem):
             sum_emissions_total.append(sum(sum_emissions)*num_days_represent)
         operating_cost = sum(sum_cost_total)
         operating_emissions = sum(sum_emissions_total)*lifespan_project
-        capital_cost = solar_PV.solar_pv(A_solar,hour,0,0,1)[1] + wind_turbine.wind_turbine(A_swept,hour,0,0,1)[1] + CHP.CHP(CAP_CHP_elect,1)[2] + boilers.NG_boiler(1,CAP_boiler)[1] + battery.battery(electricity_demand[hour],hour,E_bat[hour],A_solar,A_swept,CAP_battery,0,0)[1]
+        capital_cost = solar_PV.solar_pv(A_solar,hour,0,0,1)[1] + wind_turbine.wind_turbine(A_swept,hour,0,0,1)[1] + CHP_system.CHP(CAP_CHP_elect,1)[2] + boilers.NG_boiler(1,CAP_boiler)[1] + battery.battery(electricity_demand[hour],hour,E_bat[hour],A_solar,A_swept,CAP_battery,0,0)[1]
         total_cost = capital_cost+operating_cost
-        return total_cost,operating_emissions, operating_cost,solar_PV.solar_pv(A_solar,hour,0,0,1)[1],wind_turbine.wind_turbine(A_swept,hour,0,0,1)[1], CHP.CHP(CAP_CHP_elect,results[5])[2],boilers.NG_boiler(results[7],CAP_boiler)[1],battery.battery(electricity_demand[hour],hour,E_bat[hour],A_solar,A_swept,CAP_battery,0,0)[1]
+        return total_cost,operating_emissions, operating_cost,solar_PV.solar_pv(A_solar,hour,0,0,1)[1],wind_turbine.wind_turbine(A_swept,hour,0,0,1)[1], CHP_system.CHP(CAP_CHP_elect,results[5])[2],boilers.NG_boiler(results[7],CAP_boiler)[1],battery.battery(electricity_demand[hour],hour,E_bat[hour],A_solar,A_swept,CAP_battery,0,0)[1]
     def evaluate_operation(self,_electricity_EF,_electricity_demand,_heating_demand,_A_swept,_A_solar,_CAP_CHP_elec,_CAP_boiler,_CAP_battery):
         A_swept = _A_swept #Swept area of rotor m^2
         A_solar = _A_solar #Solar durface m^2 --> gives 160*A_solar W solar & needs= A_solar/0.7 m^2 rooftop
@@ -166,38 +166,54 @@ class TwoStageOpt(Problem):
         else:
             if use_boilers == 'yes':
                 F_F_boiler = 1
+                model.F_boiler = pyo.Var(bounds=(0,CAP_boiler/boilers.NG_boiler(0,CAP_boiler)[4])) #Decision space for natural gas fuel rate
+                Boiler_model = model.F_boiler
             else:
                 F_F_boiler =  0
+                Boiler_model = 0
             if use_CHP=='yes':
                 F_F_CHP = 1
+                model.F_CHP = pyo.Var(bounds=(0,CHP_system.CHP(CAP_CHP_elect,0)[5])) #Decision space for CHP fuel rate
+                CHP_model = model.F_CHP
             else:
                 F_F_CHP = 0
+                CHP_model = 0
             if use_grid =='yes':
                 F_E_grid = 1
+                model.E_grid = pyo.Var(bounds=(0,_electricity_demand+1)) #Decision space for grid consumption
+                grid_model = model.E_grid
             else:
                 F_E_grid = 0
-            model.E_grid = pyo.Var(bounds=(0,_electricity_demand+1)) #Decision space for grid consumption
-            model.F_CHP = pyo.Var(bounds=(0,CHP.CHP(CAP_CHP_elect,0)[5])) #Decision space for CHP fuel rate
-            model.F_boiler = pyo.Var(bounds=(0,CAP_boiler/boilers.NG_boiler(0,CAP_boiler)[4])) #Decision space for natural gas fuel rate
-            model.OBJ_cost = pyo.Objective(expr = CHP.CHP(CAP_CHP_elect,model.F_CHP)[3]*F_F_CHP + boilers.NG_boiler(model.F_boiler,CAP_boiler)[2]*F_F_CHP + model.E_grid*electricity_prices*UPV_elect*F_E_grid) #$
-            model.Constraint_elect = pyo.Constraint(expr = CHP.CHP(CAP_CHP_elect,model.F_CHP)[0]*F_F_CHP + model.E_grid*F_E_grid - _electricity_demand>=0) # Electricity balance of demand and supply sides
-            model.Constraint_heat = pyo.Constraint(expr = boilers.NG_boiler(model.F_boiler,CAP_boiler)[0]*F_F_boiler + CHP.CHP(CAP_CHP_elect,model.F_CHP)[1]*F_F_CHP -heating_demand>=0) # Heating balance of demand and supply sides
+                grid_model = 0
+            model.OBJ_cost = pyo.Objective(expr = CHP_system.CHP(CAP_CHP_elect,CHP_model)[3]*F_F_CHP + boilers.NG_boiler(Boiler_model,CAP_boiler)[2]*F_F_CHP + grid_model*electricity_prices*UPV_elect*F_E_grid) #$
+            model.Constraint_elect = pyo.Constraint(expr = CHP_system.CHP(CAP_CHP_elect,CHP_model)[0]*F_F_CHP + grid_model*F_E_grid - _electricity_demand>=0) # Electricity balance of demand and supply sides
+            model.Constraint_heat = pyo.Constraint(expr = boilers.NG_boiler(Boiler_model,CAP_boiler)[0]*F_F_boiler + CHP_system.CHP(CAP_CHP_elect,CHP_model)[1]*F_F_CHP -heating_demand>=0) # Heating balance of demand and supply sides
             #opt = SolverFactory('cplex')
             opt = SolverFactory('glpk')
             results =opt.solve(model,load_solutions=False)
             if len(results.solution)==0:
                 return 'Cost ($)', 10000,'Emissions (kg CO2)', 100000 ,'CHP', 0,'Boiler', 0,'Grid', 0
             else:
-                if use_boilers != 'yes':
-                    model.F_boiler.value = 0
-                if use_CHP!='yes':
-                    model.F_CHP.value = 0
-                if use_grid !='yes':
-                    model.E_grid.value = 0
                 model.solutions.load_from(results)
-                Cost_minimzed = CHP.CHP(CAP_CHP_elect,model.F_CHP.value*F_F_CHP)[3]+0 + boilers.NG_boiler(model.F_boiler.value*F_F_boiler,CAP_boiler)[2] + model.E_grid.value*electricity_prices*F_E_grid
-                emission_objective = CHP.CHP(CAP_CHP_elect,model.F_CHP.value*F_F_CHP)[4] + boilers.NG_boiler(model.F_boiler.value*F_F_boiler,CAP_boiler)[3] +model.E_grid.value*_electricity_EF*F_E_grid #kg CO2
-                return 'Cost ($)', Cost_minimzed,'Emissions (kg CO2)', emission_objective ,'CHP', model.F_CHP.value,'Boiler', model.F_boiler.value,'Grid', model.E_grid.value
+                if use_boilers == 'yes':
+                    value_Boiler_model = model.F_boiler.value
+                    if CAP_boiler==0:
+                        value_Boiler_model=0
+                else:
+                    value_Boiler_model = 0
+                if use_CHP=='yes':
+                    value_CHP_model=model.F_CHP.value
+                    if CAP_CHP_elect==0:
+                        value_CHP_model=0
+                else:
+                    value_CHP_model = 0
+                if use_grid =='yes':
+                    value_grid_model = model.E_grid.value
+                else:
+                    value_grid_model = 0
+                Cost_minimzed =CHP_system.CHP(CAP_CHP_elect,value_CHP_model*F_F_CHP)[3]+boilers.NG_boiler(value_Boiler_model*F_F_boiler,CAP_boiler)[2]+value_grid_model*electricity_prices*F_E_grid
+                emission_objective = CHP_system.CHP(CAP_CHP_elect,value_CHP_model*F_F_CHP)[4] + boilers.NG_boiler(value_Boiler_model*F_F_boiler,CAP_boiler)[3] +value_grid_model*_electricity_EF*F_E_grid #kg CO2
+                return 'Cost ($)', Cost_minimzed,'Emissions (kg CO2)', emission_objective ,'CHP',value_CHP_model,'Boiler', value_Boiler_model,'Grid', value_grid_model
     def represent_day_max(self):
         electricity_demand_max = []
         heating_demand_max = []
@@ -257,28 +273,28 @@ def results_extraction(problem, algorithm):
         if use_wind_turbine=='yes':
             wind_results[s] = s.variables[problem.energy_component_number['wind_turbine']]
             if isinstance(wind_results[s], list):
-                wind_results[s] = float(problem.types[problem.energy_component_number['solar_PV']].decode(wind_results[s]))
+                wind_results[s] = float(problem.types[problem.energy_component_number['wind_turbine']].decode(wind_results[s]))
                 wind_results[s]=wind_component['Swept Area m^2'][wind_results[s]]
         else:
             wind_results[s]=0
         if use_CHP=='yes':
             CHP_results[s] = s.variables[problem.energy_component_number['CHP']]
             if isinstance(CHP_results[s], list):
-                CHP_results[s] = float(problem.types[problem.energy_component_number['solar_PV']].decode(CHP_results[s]))
+                CHP_results[s] = float(problem.types[problem.energy_component_number['CHP']].decode(CHP_results[s]))
                 CHP_results[s]=CHP_component['CAP_CHP_elect_size'][CHP_results[s]]
         else:
             CHP_results[s] = 0
         if use_boilers=='yes':
             boiler_results[s] = s.variables[problem.energy_component_number['boilers']]
             if isinstance(boiler_results[s], list):
-                boiler_results[s] = float(problem.types[problem.energy_component_number['solar_PV']].decode(boiler_results[s]))
+                boiler_results[s] = float(problem.types[problem.energy_component_number['boilers']].decode(boiler_results[s]))
                 boiler_results[s]=boiler_component['CAP_boiler (kW)'][boiler_results[s]]
         else:
             boiler_results[s] = 0
         if use_battery=='yes':
-            battery_results[s] = s.variables[self.energy_component_number['battery']]
+            battery_results[s] = s.variables[problem.energy_component_number['battery']]
             if isinstance(battery_results[s], list):
-                battery_results[s] = float(problem.types[problem.energy_component_number['solar_PV']].decode(battery_results[s]))
+                battery_results[s] = float(problem.types[problem.energy_component_number['battery']].decode(battery_results[s]))
                 battery_results[s]=battery_component['CAP_battery (kWh)'][battery_results[s]]
         else:
             battery_results[s] = 0
