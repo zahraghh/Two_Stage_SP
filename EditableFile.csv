@@ -2,8 +2,8 @@ Names (do not change this column),Values,Instruction,Where it's used
 Weather data download and analysis,yes,"Downloading data for the city from NSRDB (please, fill rows 8 to 21)",Setting up the framework
 Generate Scenarios,yes,"Generating scenarios based on the probability distributions (please, fill row 22)",Setting up the framework
 Perfrom scenario reduction,yes,"Scneario reduction using k-medoid and PCA (please, fill rows 23 and 24)",Setting up the framework
-Search optimum PCA,no,Finding the optimum number of features in PCA: helps to fill row 23,Setting up the framework
-Search optimum clusters,no,Finding the optimum number of clusters in k-medoid:  helps to fill row 24,Setting up the framework
+Search optimum PCA,no,Finding the optimum number of features in PCA: generate a figure that helps to fill row 23,Setting up the framework
+Search optimum clusters,no,Finding the optimum number of clusters in k-medoid:  generate a figure that helps to fill row 24,Setting up the framework
 Perform two stage optimization,yes,"Perfroming the two-stage SP optimization using NSGA-II and CPLEX solver (please, fill rows 25 to 37)",Setting up the framework
 city,Salt lake city,City's name,Weather data analysis
 Longitude,-111.888142,Longitude of the case study's city,Weather data analysis
@@ -17,7 +17,7 @@ your_name,,"Add your name without space (e.g., Zahra+Ghaemi)",Weather data downl
 reason_for_use,,Add the reason you want to download the meteorological data (e.g. Academic),Weather data download from  the National Solar Radiation Database (NSRDB)
 your_affiliation,,"Add your affiliation without space (e.g., University+of+Utah)",Weather data download from  the National Solar Radiation Database (NSRDB)
 your_email,,Add your email address,Weather data download from  the National Solar Radiation Database (NSRDB)
-mailing_list,yes,Do you want to be added to NSRDB  mailing list? ,Weather data download from  the National Solar Radiation Database (NSRDB)
+mailing_list,,Do you want to be added to NSRDB  mailing list? ,Weather data download from  the National Solar Radiation Database (NSRDB)
 SAM API key,,Add the SAM API key. You can signup here with your email address to get a key: https://developer.nrel.gov/signup/,Weather data download from  the National Solar Radiation Database (NSRDB)
 State,UT,"State abbrevation to calculate electricity generation emission factor / If you leave it empty, normal distribution with 10% standard deviation will be considered as the uncertainty of electricity emission",Scenario generation of electricity generation emission factor
 PCA numbers,18,Optimum number of PCA features,Scenario reduction
@@ -36,9 +36,9 @@ roof_top_area,7540,Total available rooftop area (m^2),District energy system's c
 population_size,50,"Population size for the NSGA-II, recommended value is 50",Perform two stage optimization
 num_iterations,1000,"Number of iterations for the NSGA-II, recommended value depends on population size, if population size is 50, Number of iteration can be 2000",Perform two stage optimization
 num_processors,5,"Number of processor to use in the NSGA-II, depend on the working PC/laptop, 5 is a good numbe, maximum can be 61",Perform two stage optimization
-Boiler,yes,Do we use boilers in the district energy system?,Energy Components in the DES
-Grid,yes,Do we use the grid in the district energy system?,Energy Components in the DES
+Boiler,yes,"Do we use boilers in the district energy system? Please, set ""Boiler"" as yes if you haven't added another component to provide heat",Energy Components in the DES
+Grid,yes,Do we use the grid in the district energy system? Please. Leave it as 'yes' if you dp not want to analyze a stand alone system.,Energy Components in the DES
 CHP,yes,Do we use CHP in the district energy system?,Energy Components in the DES
 Solar_PV,yes,Do we use solar PV in the district energy system?,Energy Components in the DES
-Wind_turbines,yes,Do we use wind turbines in the district energy system?,Energy Components in the DES
+Wind_turbines,yes,Do we use wind turbines in the district energy system?,
 Battery,yes,Do we use batteries in the district energy system?,Energy Components in the DES
