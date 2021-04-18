@@ -7,7 +7,7 @@ tags:
   - multi-objective optimization
   - uncertainty analysis
 authors:
-  - name: Zahra Ghaemi^[Custom footnotes for e.g. denoting who the corresponding author is can be included like this.]
+  - name: Zahra Ghaemi^[Corresponding author]
     orcid: 0000-0003-4072-0881
     affiliation: 1 # (Multiple affiliations must be quoted)
   - name: Amanda D. Smith
