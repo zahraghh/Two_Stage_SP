@@ -11,7 +11,16 @@ Creat a new environmnet for the two stage stochastic programming optimization
 ```
 conda create -n two_stage_env python=3.7.7
 ```
-## Installing the needed packages
+Make sure the environment is created. By running this code, the list of available environments, including two_stage_env, should be shown.
+```
+conda env list
+```
+Actiev the new environment. This command should change the environment from base to two_stage_env.
+```
+conda activate two_stage_env
+```
+Download this repository. 
+
 To install the required packages to run the framework, the requirements are stored in the requirements.txt file in the repository:
 ```
 pip install -r  requirements.txt
