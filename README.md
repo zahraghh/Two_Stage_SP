@@ -23,7 +23,7 @@ Download this repository.
 
 To install the required packages to run the framework, the requirements are stored in the requirements.txt file in the repository:
 ```
-pip install -r  requirements.txt
+pip install -r  Path_to_the_file/requirements.txt
 ```
 and install scikit-learn-extra uisng the conda environment:
 ```
