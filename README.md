@@ -23,9 +23,15 @@ Download this repository.
 
 To install the required packages to run the framework, the requirements are stored in the requirements.txt file in the repository:
 ```
-pip install -r  Path_to_the_file/requirements.txt
+pip install -r  Path_to_this_file/requirements.txt
 ```
-and install scikit-learn-extra uisng the conda environment:
+and install scikit-learn-extra uisng the conda environment to use in the k-medoid clustering algorithm
 ```
 conda install -c conda-forge scikit-learn-extra
 ```
+Run the Python file after making sure the inputs in the EditableFile.csv, Total_energy_demands.csv, and csv files in the Energy Components are based on your need.
+```
+python Path_to_this_file\main_twostage_SP.py
+```
+
+
