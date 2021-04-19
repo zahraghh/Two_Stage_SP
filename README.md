@@ -2,8 +2,10 @@
 This repository provides a framework to perform two-stage stochastic programming on a district energy system considering uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors.
 
 ## What Can I change?
-Three sets of input data are present that a user can change. The first and main input is "EditableFile.csv" file. This CSV file consist of four columns. The first column is "Names (do not change this column)" that provides the keys used in different parts of the code; therefore, please, leave this column unchanged.
-The input data should be entered using the EditableFile.csv. The EditableFile.csv file has four columns: the names of each row, the value of each row that will be used in the framework, the instruction of each row that helps to undesrtand why the user needs to fill this value, and in what stage of the framework this row is used.
+Three sets of input data are present that a user can change to test a new case study.
+
+The first and main input is "EditableFile.csv" file. This CSV file consists of four columns. The first column is "Names (do not change this column)" that provides the keys used in different parts of the code; therefore, please, leave this column unchanged. The second column is "Values" that a user can change. The values are yes/no questions, text, or numbers, which a user can change to make it specific to their case study or leave them as they are. The third column is "Instruction". This column gives some instructions in filling the "Value" column, and if by changing the "Value", the user should change other rows in the CSV file or not. The forth column is "Where it's used" that gives the subsection of each value. This column can show the rows that are related to each other. 
+
 
 ## What are the Results?
 
@@ -12,7 +14,7 @@ Installing Anaconda
 
 Search for Anaconda Prompt
 
-Creat a new environmnet for the two stage stochastic programming optimization
+Create a new environmnet for the two stage stochastic programming optimization
 ```
 conda create -n two_stage_env python=3.7.7
 ```
