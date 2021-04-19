@@ -25,11 +25,10 @@ The "editable_values.csv" consists of four main sections:
 4. The fourth section is "District Energy System Optimization." In this section, the two-stage optimization of a district energy system considerin uncertainties to minimze cost and emissions. The rows from 38 to 47 are related to district energy system's charectristics, input parameters to run the multi-objective optimization, and energy components that can be used in the district energy systems. The user is responsible to include rational set of energy components to provide the electricity and heating needs from the demand side. 
 
 ### total_energy_demands.csv file
-The "total_energy_demands.csv" file consists of the aggregated hourly electricity (kWh), heating (kWh), and cooling (kWh) needs of a group of buildings for a base year, representing the demand side. The user can change these to their own case study's enegry demands. 
+The "total_energy_demands.csv" file consists of the aggregated hourly electricity (kWh), heating (kWh), and cooling (kWh) needs of a group of buildings for a base year, representing the demand side. The user can changethevalues of electricity, heating, and cooling to their own case study's enegry demands. 
 
 ### Energy Compoennts folder
-The "Energy Components" folder consists of the CSV files of the five selected energy components in this repository, which are natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, and batteries. 
-
+The "Energy Components" folder consists of the CSV files of the five selected energy components in this repository, which are natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, and batteries. These CSV files for each energy component consists of a series of capacities, efficiencies, investment cost, operation and maintenece cost, and life span of the energy components that are considered in this discrete optimization repository. 
 
 ## What are the Results?
 
