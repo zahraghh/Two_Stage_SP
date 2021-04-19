@@ -22,7 +22,7 @@ The "editable_values.csv" consists of four main sections:
 
 3. The third section is "Scenario Generation/Reduction" that consists of row 32 to 34. This section relates to generating uncertain scenarios of energy demands, solar irradiance, wind speed, and electricity emissions. After 81 years of synthetic data is generated in "Scenarios Generation" folder, Principal component analysis (PCA) is used to extract an optimum number of features from each day, and k-medoid algoirthm is used to reduce the number of generated scenarios. If rows 8 (Search optimum PCA) and 9 (Search optimum clusters) have 'yes' values, two figures will be generated in the directory. These two figures can help user that is familiar with the explained variance and elbow method to select the number of optimum clusters and features. If a user is not familiar with these two concepts, they can select 18 features as a safe number for optimum number of features. They can select 10 as the number of clusters. For more accuracy, a user can increace the number of clusters but the computation time increases as well.
 
-4. 
+4. The forth section is "District Energy System Optimization".
 
 
 ### total_energy_demands.csv file
