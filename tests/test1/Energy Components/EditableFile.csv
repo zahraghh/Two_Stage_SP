@@ -1,0 +1,44 @@
+Names (do not change this column),Values,Instruction,Where it's used
+Weather data download and analysis,yes,"Downloading data for the city from NSRDB (please, fill rows 8 to 21)",Setting up the framework
+Generate Scenarios,yes,"Generating scenarios based on the probability distributions (please, fill row 22)",Setting up the framework
+Perfrom scenario reduction,yes,"Scneario reduction using k-medoid and PCA (please, fill rows 23 and 24)",Setting up the framework
+Search optimum PCA,no,Finding the optimum number of features in PCA: generate a figure that helps to fill row 23,Setting up the framework
+Search optimum clusters,no,Finding the optimum number of clusters in k-medoid:  generate a figure that helps to fill row 24,Setting up the framework
+Perform two stage optimization,yes,"Perfroming the two-stage SP optimization using NSGA-II and CPLEX solver (please, fill rows 25 to 37)",Setting up the framework
+city,Salt lake city,City's name,Weather data analysis
+Longitude,-111.888142,Longitude of the case study's city,Weather data analysis
+Latitude,40.758478,Latitude of the case study's city,Weather data analysis
+Altitude,1288,Altitude of the case study's city,Weather data analysis
+solar_tilt,35,Tilt degree of solar panels,Weather data analysis
+solar_azimuth,180,Azimuth degree of solar panels,Weather data analysis
+starting_year,1998,The first available year from NSRDB database,Weather data analysis
+ending_year,2019,The last available year from NSRDB database,Weather data analysis
+your_name,,"Add your name without space (e.g., Zahra+Ghaemi)",Weather data download from  the National Solar Radiation Database (NSRDB)
+reason_for_use,,Add the reason you want to download the meteorological data (e.g. Academic),Weather data download from  the National Solar Radiation Database (NSRDB)
+your_affiliation,,"Add your affiliation without space (e.g., University+of+Utah)",Weather data download from  the National Solar Radiation Database (NSRDB)
+your_email,,Add your email address,Weather data download from  the National Solar Radiation Database (NSRDB)
+mailing_list,,Do you want to be added to NSRDB  mailing list? ,Weather data download from  the National Solar Radiation Database (NSRDB)
+SAM API key,,Add the SAM API key. You can signup here with your email address to get a key: https://developer.nrel.gov/signup/,Weather data download from  the National Solar Radiation Database (NSRDB)
+State,UT,"State abbrevation to calculate electricity generation emission factor / If you leave it empty, normal distribution with 10% standard deviation will be considered as the uncertainty of electricity emission",Scenario generation of electricity generation emission factor
+PCA numbers,18,Optimum number of PCA features,Scenario reduction
+Cluster numbers,9,Optimum number of clusters,Scenario reduction
+city EF,1593,city's electricity emission factor  (lbs/MWh),District energy system's charecteristics
+renewable percentage,0.29,What percentage of city's electricity emission factor should be used?,District energy system's charecteristics
+CP_ng,1037,Specific heat of natural gas (BTU/cubic-feet),District energy system's charecteristics
+price_NG,4.99,Constant price of natural gas ($/cubic-ft),District energy system's charecteristics
+electricity_price,6.8,Constant price of electricity (cent/kWh),District energy system's charecteristics
+lifespan_project,20,Lifespan of the disrict energy system (years),District energy system's charecteristics
+UPV_maintenance,14.887,UPV factor for finding the present value of future single costs of maintenance: https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 9,District energy system's charecteristics
+UPV_NG,17.56,UPV factors for finding the present value of future single costs of natural gas: https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 21 utah,District energy system's charecteristics
+UPV_elect,14.76,UPV factors for finding the present value of future single costs of electricity:https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 21 utah,District energy system's charecteristics
+PV_module,1.7,Area of each commercial PV moduel (m^2),District energy system's charecteristics
+roof_top_area,7540,Total available rooftop area (m^2),District energy system's charecteristics
+population_size,50,"Population size for the NSGA-II, recommended value is 50",Perform two stage optimization
+num_iterations,1000,"Number of iterations for the NSGA-II, recommended value depends on population size, if population size is 50, Number of iteration can be 2000",Perform two stage optimization
+num_processors,5,"Number of processor to use in the NSGA-II, depend on the working PC/laptop, 5 is a good numbe, maximum can be 61",Perform two stage optimization
+Boiler,yes,"Do we use boilers in the district energy system? Please, set ""Boiler"" as yes if you haven't added another component to provide heat",Energy Components in the DES
+Grid,yes,Do we use the grid in the district energy system? Please. Leave it as 'yes' if you dp not want to analyze a stand alone system.,Energy Components in the DES
+CHP,yes,Do we use CHP in the district energy system?,Energy Components in the DES
+Solar_PV,yes,Do we use solar PV in the district energy system?,Energy Components in the DES
+Wind_turbines,yes,Do we use wind turbines in the district energy system?,
+Battery,yes,Do we use batteries in the district energy system?,Energy Components in the DES
