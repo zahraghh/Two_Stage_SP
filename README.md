@@ -7,13 +7,13 @@ Three sets of input data are present that a user can change to test a new case s
 ### editable_values.csv file
 The first and main input is "editable_values.csv" file. This CSV file consists of four columns: 
 
-(1) The first column is "Names (do not change this column)" that provides the keys used in different parts of the code; therefore, please, leave this column unchanged. 
+1. The first column is "Names (do not change this column)" that provides the keys used in different parts of the code; therefore, please, leave this column unchanged. 
 
-(2) The second column is "Values" that a user can change. The values are yes/no questions, text, or numbers, which a user can change to make it specific to their case study or leave them as they are. 
+2. The second column is "Values" that a user can change. The values are yes/no questions, text, or numbers, which a user can change to make it specific to their case study or leave them as they are. 
 
-(3) The third column is "Instruction". This column gives some instructions in filling the "Value" column, and if by changing the "Value", the user should change other rows in the CSV file or not. 
+3. The third column is "Instruction". This column gives some instructions in filling the "Value" column, and if by changing the "Value", the user should change other rows in the CSV file or not. 
 
-(4) The forth column is "Where it's used" that gives the subsection of each value. This column can show the rows that are related to each other. 
+4. The forth column is "Where it's used" that gives the subsection of each value. This column can show the rows that are related to each other. 
 
 The "editable_values.csv" consists of four main sections: 
 (1) The first section is "Setting Up the Framework". In this section, the user fills the rows from 5 to 11 by asnwering a seris of yes/no questions. If this is the first time that a user compiles this program, the asnwer to all of the questions is 'yes'. 
