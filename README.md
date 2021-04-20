@@ -9,7 +9,7 @@ After anaconda is installed, search for anaconda prompt on your system:
 - macOS: Cmd+Space to open Spotlight Search and type “Navigator” to open the program.
 - Linux–CentOS: Open Applications - System Tools - termin
     
-Create a new environment for this repository, the two-stage stochastic programming. python=3.7.7 is the python version we have tested this repository on. 
+Create a new environment for this repository, the two-stage stochastic programming, which python=3.7.7 is the python version we have tested this repository on. 
 ```
 conda create -n two_stage_env python=3.7.7
 ```
@@ -22,22 +22,20 @@ Activate two_stage_env environment. This command should change the environment f
 ```
 conda activate two_stage_env
 ```
-Now a new environmnet is ready to test the repository. 
+Now a new environmnet,two_stage_env, is ready to test the repository. 
 
 Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE or you can download the file in your directory using this line in anaconda prompt:
 ```
 git clone https://github.com/zahraghh/Two_Stage_SP.git
 ```
 
-To install the required packages to run the framework, the requirements are stored in the requirements.txt file in the repository:
-```
-pip install -r  Path_to_the_folder\Two_Stage_SP-main\requirements.txt
-```
-and install scikit-learn-extra using the conda environment to use in the k-medoid clustering algorithm
+Two packages should be installed using the conda command.
+
+1. install scikit-learn-extra in the conda environment:
 ```
 conda install -c conda-forge scikit-learn-extra
 ```
-and installing a solver that is publicly available:
+2. install a solver that is available for public use:
 ```
 conda install glpk --channel conda-forge
 ```
