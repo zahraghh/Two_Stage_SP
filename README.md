@@ -41,6 +41,10 @@ Create a new environment for the two-stage stochastic programming optimization
 ```
 conda create -n two_stage_env python=3.7.7
 ```
+and installing a solver that is publicly available:
+```
+conda install glpk --channel conda-forge
+```
 Make sure the environment is created. By running this code, the list of available environments, including two_stage_env, should be shown.
 ```
 conda env list
