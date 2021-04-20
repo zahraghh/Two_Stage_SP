@@ -1,5 +1,5 @@
 # Two-Stage Stochastic Programming
-This repository provides a framework to perform a multi-objective two-stage stochastic programming on a district energy system considering uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimze the total cost and operating CO<sub>2</sub> emissions. Natural gas boilers, combined heating and power, solar photovoltaic, wind turbines, batteries, and the grid are the energy components conisdred in this repository. 
+This repository provides a framework to perform a multi-objective two-stage stochastic programming on a district energy system. In this framework, we consider uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimze the total cost and operating CO<sub>2</sub> emissions. Natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, batteries, and the grid are the energy components conisdred in this repository. 
 
 ## How to Run the File?
 To run the file in this repository, we suggest to use a new conda environment. You can downalod and install anaconda using the following link: https://docs.anaconda.com/anaconda/install/
