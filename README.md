@@ -5,9 +5,9 @@ This repository provides a framework to perform two-stage stochastic programming
 To run the file in this repository, we suggest to use a new conda environment. You can downalod and install anaconda using the following link: https://docs.anaconda.com/anaconda/install/
 
 After anaconda is installed, search for anaconda prompt on your system:
-    Windows: Click Start, search, or select Anaconda Prompt from the menu.
-    macOS: Cmd+Space to open Spotlight Search and type “Navigator” to open the program.
-    Linux–CentOS: Open Applications - System Tools - termin
+- Windows: Click Start, search, or select Anaconda Prompt from the menu.
+- macOS: Cmd+Space to open Spotlight Search and type “Navigator” to open the program.
+- Linux–CentOS: Open Applications - System Tools - termin
     
 Create a new environment for the two-stage stochastic programming optimization
 ```
