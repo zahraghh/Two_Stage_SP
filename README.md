@@ -9,20 +9,25 @@ After anaconda is installed, search for anaconda prompt on your system:
 - macOS: Cmd+Space to open Spotlight Search and type “Navigator” to open the program.
 - Linux–CentOS: Open Applications - System Tools - termin
     
-Create a new environment for the two-stage stochastic programming optimization
+Create a new environment for this repository, the two-stage stochastic programming. python=3.7.7 is the python version we have tested this repository on. 
 ```
 conda create -n two_stage_env python=3.7.7
 ```
 
-Make sure the environment is created. By running this code, the list of available environments, including two_stage_env, should be shown.
+Make sure the environment is created. By running the following code, the list of available environments, including two_stage_env, should be shown.
 ```
 conda env list
 ```
-Active the new environment. This command should change the environment from base to two_stage_env.
+Activate two_stage_env environment. This command should change the environment from base to two_stage_env.
 ```
 conda activate two_stage_env
 ```
-Download this repository. 
+Now a new environmnet is ready to test the repository. 
+
+Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE or you can download the file in your directory using this line in anaconda prompt:
+```
+git clone https://github.com/zahraghh/Two_Stage_SP.git
+```
 
 To install the required packages to run the framework, the requirements are stored in the requirements.txt file in the repository:
 ```
