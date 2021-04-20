@@ -8,7 +8,7 @@ from pathlib import Path
 import Two_Stage_SP
 from Two_Stage_SP.solar_PV import solar_pv_calc
 from Two_Stage_SP.wind_turbine import wind_turbine_calc
-editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
+editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
 components_path = os.path.join(sys.path[0])+'/Energy Components/'
 battery_component = pd.read_csv(components_path+'battery.csv')

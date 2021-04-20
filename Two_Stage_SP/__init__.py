@@ -1,4 +1,4 @@
-__version__ = "0.0.0"
+__version__ = "0.1.0"
 __author__ = 'Zahra Ghaemi'
 from .error_evaluation import errors
 error_evaluation.errors()

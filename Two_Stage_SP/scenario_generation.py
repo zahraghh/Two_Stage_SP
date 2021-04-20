@@ -7,7 +7,7 @@ import os
 import sys
 import Two_Stage_SP
 from Two_Stage_SP.EGEF import EF,printinfo,fit_and_plot,EGEF_state,best_fit_distribution
-editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
+editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
 city = '/'+editable_data['city']
 folder_path = os.path.join(sys.path[0])+str(city)
@@ -25,7 +25,7 @@ def scenario_generation_results(state=None):
     weather_data = pd.read_csv(folder_path+info_name, header=None)[2:]
     GTI_distribution = pd.read_csv(folder_path+'/best_fit_GTI.csv')
     wind_speed_distribution = pd.read_csv(folder_path+'/best_fit_wind_speed.csv')
-    energy_data = pd.read_csv(os.path.join(sys.path[0])+'/Total_energy_demands.csv')
+    energy_data = pd.read_csv(os.path.join(sys.path[0])+'/total_energy_demands.csv')
     weather_data = pd.read_csv(folder_path+info_name, header=None)[2:]
     GTI = [float(i) for i in list(weather_data[46])]
     wind_speed = [float(i) for i in list(weather_data[8])]

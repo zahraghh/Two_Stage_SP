@@ -4,7 +4,7 @@ import pandas as pd
 import csv
 import PySAM.ResourceTools as tools
 def download_meta_data(city):
-    editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
+    editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
     editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
     save_path = os.path.join(sys.path[0])+str(city)
     if not os.path.exists(save_path):

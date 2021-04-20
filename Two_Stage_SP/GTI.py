@@ -8,7 +8,7 @@ import pandas as pd
 import datetime
 import os
 import sys
-editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
+editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
 lat = float(editable_data['Latitude'])
 lon = float(editable_data['Longitude'])

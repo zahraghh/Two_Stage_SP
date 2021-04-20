@@ -7,7 +7,7 @@ import plotly.express as px
 import os
 import sys
 data_path = {}
-editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
+editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
 city ='/'+ str(editable_data['city'])
 file_name = city+'_Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors/'

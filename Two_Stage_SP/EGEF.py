@@ -126,7 +126,12 @@ pet_params=fit_and_plot(st.johnsonsu, EF_pet_list)
 
 def EGEF_state(state):
     state_stats = []
-    electricty_generation_total_state = generation_regions[generation_regions['STATE']==state][generation_regions['YEAR']==2017][generation_regions['TYPE OF PRODUCER']=='Total Electric Power Industry'][generation_regions['ENERGY SOURCE']=='Total']['GENERATION (Megawatthours)']
+    #electricty_generation_total_state = generation_regions[generation_regions['STATE']==state][generation_regions['YEAR']==2017][generation_regions['TYPE OF PRODUCER']=='Total Electric Power Industry'][generation_regions['ENERGY SOURCE']=='Total']['GENERATION (Megawatthours)']
+    electricty_generation_total_state = generation_regions[
+    (generation_regions['STATE']==state) &
+    (generation_regions['YEAR']==2017)  &
+    (generation_regions['TYPE OF PRODUCER']=='Total Electric Power Industry')  &
+    (generation_regions['ENERGY SOURCE']=='Total')]['GENERATION (Megawatthours)']
     for i in range(num_simulations):
         # Choose random inputs for the uncertain inputs: Coal, Natural gas, Petroleum.
         coal_EF_rd = st.levy_stable.rvs(alpha=coal_params[2][0], beta=coal_params[2][1], loc= coal_params[2][2] , scale= coal_params[2][3] , size=num_reps)
@@ -135,6 +140,7 @@ def EGEF_state(state):
         state_stats.append((coal_EF_rd*EF_coal_results[0][state] +  gas_EF_rd*EF_gas_results[0][state] +  pet_EF_rd*EF_pet_results[0][state])*2.20462/float(electricty_generation_total_state)) # EF_Electriicty (lb/MWh) Average distribution of fuels in the U.S.
     data_new= state_stats
     return data_new
+EGEF_state('UT')
 matplotlib.rcParams['figure.figsize'] = (16.0, 12.0)
 matplotlib.style.use('ggplot')
 # Create models from data

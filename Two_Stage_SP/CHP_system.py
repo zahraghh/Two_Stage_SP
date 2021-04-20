@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 BTUtokWh_convert = 0.000293071 # 1BTU = 0.000293071 kWh
 mmBTutoBTU_convert = 10**6
-editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
+editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
 components_path = os.path.join(sys.path[0])+'/Energy Components/'
 CHP_component = pd.read_csv(components_path+'/CHP.csv')
