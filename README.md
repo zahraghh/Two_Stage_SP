@@ -37,18 +37,18 @@ conda install glpk --channel conda-forge
 
 Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE.
 
-Unzip the folder, and locally install the package using the pip command.
+Unzip the "Two_Stage_SP-IMECE" folder, and locally install the package using the pip command. The /path/to/Two_Stage_SP-IMECE is the path to "Two_Stage_SP-IMECE" folder that contains a setup.py file. 
 ```
-pip install -e /path/to/package
+pip install -e /path/to/Two_Stage_SP-IMECE
 ```
 
-To use this repository, you should directly compile "main_two_stage_SP.py" code in "Framework Test_University of Utah" folder".
+To use this repository, you should directly compile "main_two_stage_SP.py" code in "Framework Test_University of Utah" folder.
 
 Have a look at "Framework Test_University of Utah" folder. Four files are needed to succesfully compile the "main_two_stage_SP.py" code:
-- "Energy Components" folder containing energy components charectristics
-- "editable_values.csv' file containing variable inputs of the package
-- "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
-- "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
+1. "Energy Components" folder containing energy components charectristics
+2. "editable_values.csv' file containing variable inputs of the package
+3. "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
+4. "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
 
 ## What Can I change?
 Three sets of input data are present that a user can change to test a new/modified case study.
