@@ -7,9 +7,10 @@ from platypus import NSGAII, Problem, Real, Integer, InjectedPopulation,GAOperat
 # I use platypus library to solve the muli-objective optimization problem:
 # https://platypus.readthedocs.io/en/latest/getting-started.html
 from pyomo.opt import SolverFactory
+import Two_Stage_SP
 from Two_Stage_SP import download_windsolar_data, GTI,uncertainty_analysis,scenario_generation,clustring_kmediod_PCA,NSGA2_design_parallel_discrete
 if __name__ == "__main__":
-    editable_data_path =os.path.join(sys.path[0], 'EditableFile.csv')
+    editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
     editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
     city_DES ='/'+ str(editable_data['city'])
     state = editable_data['State']
@@ -44,13 +45,13 @@ if __name__ == "__main__":
     #Do we need to generate Pareto-front and parallel coordinates plots for the results?
     if editable_data['Visualizing the final results']=='yes':
         from Two_Stage_SP.plot_results_design import parallel_plots,ParetoFront_EFs
-        file_name = city+'_Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors/'
+        file_name = city_DES+'_Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors/'
         results_path = os.path.join(sys.path[0]) + file_name
         if not os.path.exists(results_path):
             print('The results folder is not available. Please, generate the results first')
             sys.exit()
-        plot_results_design.ParetoFront_EFs()
-        plot_results_design.parallel_plots('cost')
-        plot_results_design.parallel_plots('emissions')
+        Two_Stage_SP.plot_results_design.ParetoFront_EFs()
+        Two_Stage_SP.plot_results_design.parallel_plots('cost')
+        Two_Stage_SP.plot_results_design.parallel_plots('emissions')
         file_name = editable_data['city']+'_Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors/'
         print('Plots are generated in the '+ file_name+' folder')
