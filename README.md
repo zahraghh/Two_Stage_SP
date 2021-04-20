@@ -9,7 +9,7 @@ After anaconda is installed, search for anaconda prompt on your system:
 - macOS: Cmd+Space to open Spotlight Search and type “Navigator” to open the program.
 - Linux–CentOS: Open Applications - System Tools - termin
     
-Create a new environment for this repository, the two-stage stochastic programming, which python=3.7.7 is the python version we have tested this repository on. 
+Create a new environment for this repository, two_stage_env. We have tested this framework using python=3.7.7 version.
 ```
 conda create -n two_stage_env python=3.7.7
 ```
