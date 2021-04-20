@@ -1,7 +1,7 @@
 # Two-Stage Stochastic Programming
 This repository provides a framework to perform a multi-objective two-stage stochastic programming on a district energy system. In this framework, we consider uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimze the total cost and operating CO<sub>2</sub> emissions. Natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, batteries, and the grid are the energy components conisdred in this repository. 
 
-## How to Run the File?
+## How to Compile the File?
 To use this repository, we suggest using a new conda environment. You can downalod and install anaconda using the following link: https://docs.anaconda.com/anaconda/install/
 
 After anaconda is installed, search for anaconda prompt on your system:
@@ -82,11 +82,11 @@ The "Energy Components" folder consists of the CSV files of the five selected en
 ## What are the Results?
 If all parts of the framework are used, which means a user writes 'yes' values for rows 5 to 11 in the "editable_values.csv" file, a series of CSV files and figures will be generated.
 1. Two figures will be generated in the directory related to the optimum number of features in PCA and the optimum number of clusters in the k-medoid algorithm if rows 7, 8, and 9 are 'yes.' 
-If a user is familiar with the connection of explained variance and the number of features, can use the "Explained variance vs PCA features" figure in the directory to select the optimum number of features. If a user is familiar with the elbow method, they can use the "Inertia vs Clusters" figure in the directory to select the optimum number of clusters. 
+If a user is familiar with the connection of explained variance and the number of features, they can use the "Explained variance vs PCA features" figure in the directory to select the optimum number of features. If a user is familiar with the elbow method, they can use the "Inertia vs Clusters" figure in the directory to select the optimum number of clusters. 
 2. A folder named 'City_name_Discrete_EF_...' will be generated that contains five files. 
-    1. One "ParetoFront" figure shows the cost and emissions trade-off for the different scenarios to minimize cost and emissions. 
-    2. One CSV file, "objectives," that represent the cost and CO<sub>2</sub> emissions trade-off for the different scenarios to minimize cost and emissions. This CSV file contains the values that are shown in the "ParetoFront" figure. 
-    3. Two parallel coordinates figures, "Parallel_coordinates_cost" and "Parallel_coordinates_emissions," which show the variation in the optimum energy configurations to minimize the total cost and operating CO<sub>2</sub> emissions. 
-    4. One CSV file that contains the optimum sizing of five selected energy components in this repository, which are natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, and batteries, to minimize the total cost and operating CO<sub>2</sub> emissions. 
+    1. One "ParetoFront.png" figure that shows the total cost and  operating CO<sub>2</sub> emissions trade-off for different scenarios to minimize cost and emissions. 
+    2. One CSV file, "objectives.csv," that represent the total cost and operating CO<sub>2</sub> emissions trade-off for the different scenarios to minimize cost and emissions. This CSV file contains the values that are shown in the "ParetoFront.png" figure. 
+    3. Two parallel coordinates figures, "Parallel_coordinates_cost.png" and "Parallel_coordinates_emissions.png," which show the variation in the optimum energy configurations to minimize the total cost and operating CO<sub>2</sub> emissions. 
+    4. One CSV file that contains the optimum sizing of five selected energy components in this repository, which are natural gas boilers, CHP, solar PV, wind turbines, and batteries, to minimize the total cost and operating CO<sub>2</sub> emissions. 
 This CSV file contains all of the values that are used in the two parallel coordinates figures.
-3. A "Scenario Generation" folder will be generated. This folder is not the direct results from compiling repository, but it will be used to generate the final results.  
+
