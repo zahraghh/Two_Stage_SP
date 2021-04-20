@@ -60,9 +60,9 @@ The first and primary input is the "editable_values.csv" file. This CSV file con
 
 2. The second column is "Values" that a user can change. The values are yes/no questions, text, or numbers, which a user can modify to make it specific to their case study or leave them as they are. 
 
-3. The third column is "Instruction." This column gives some instructions in filling the "Value" column, and if by changing the "Value," the user must change other rows in the CSV file or not. 
+3. The third column is "Instruction." This column gives some instructions in filling the "Value" column, and if by changing the "Value," the user must change other rows in the CSV file or not. Please, if you want to change a value, read its instruction. 
 
-4. The fourth column is "Where it's used," which gives the subsection of each value. This column can show the rows related to each other. 
+4. The fourth column is "Where it's used," which gives the subsection of each value. This column can show the rows that are related to each other. 
 
 The "editable_values.csv" consists of four main sections: 
 1. The first section is "Setting Up the Framework." In this section, the user fills the rows from 5 to 11 by answering a series of yes/no questions. If this is the first time a user compiles this program, the answer to all of the questions is 'yes.' 
