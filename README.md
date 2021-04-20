@@ -2,14 +2,14 @@
 This repository provides a framework to perform a multi-objective two-stage stochastic programming on a district energy system. In this framework, we consider uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimze the total cost and operating CO<sub>2</sub> emissions. Natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, batteries, and the grid are the energy components conisdred in this repository. 
 
 ## How to Run the File?
-To run the file in this repository, we suggest to use a new conda environment. You can downalod and install anaconda using the following link: https://docs.anaconda.com/anaconda/install/
+To use this repository, we suggest using a new conda environment. You can downalod and install anaconda using the following link: https://docs.anaconda.com/anaconda/install/
 
 After anaconda is installed, search for anaconda prompt on your system:
 - Windows: Click Start, search, or select Anaconda Prompt from the menu.
 - macOS: Cmd+Space to open Spotlight Search and type “Navigator” to open the program.
 - Linux–CentOS: Open Applications - System Tools - termin
     
-Create a new environment for this repository, two_stage_env. We have tested this framework using python=3.7.7 version.
+Create a new environment for this repository, two_stage_env. We have tested this framework using python=3.7.7.
 ```
 conda create -n two_stage_env python=3.7.7
 ```
@@ -41,6 +41,9 @@ Unzip the folder, and locally install the package using the pip command.
 ```
 pip install -e /path/to/package
 ```
+
+To use this repository, you should directly compile "main_two_stage_SP.py" code in "Framework Test_University of Utah" folder".
+
 Have a look at "Framework Test_University of Utah" folder. Four files are needed to succesfully compile the "main_two_stage_SP.py" code:
 - "Energy Components" folder containing energy components charectristics
 - "editable_values.csv' file containing variable inputs of the package
@@ -48,7 +51,7 @@ Have a look at "Framework Test_University of Utah" folder. Four files are needed
 - "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
 
 ## What Can I change?
-Three sets of input data are present that a user can change to test a new case study.
+Three sets of input data are present that a user can change to test a new/modified case study.
 
 ### editable_values.csv file
 The first and primary input is the "editable_values.csv" file. This CSV file consists of four columns: 
