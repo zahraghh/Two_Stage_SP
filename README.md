@@ -68,10 +68,10 @@ The "Energy Components" folder consists of the CSV files of the five selected en
 
 ## What are the Results?
 If all parts of the framework is used, which means a user writes 'yes' values for rows 5 to 11 in the "editable_values.csv" file, a series of CSV files and figures will be generated.
-- Two figures will be generated in the directory related to optimum number of features in PCA and optimum number of clusters in k-medoid algorithm if row 7, 8, and 9 are 'yes'.If a user is familiar with the connection of explained variance and number of features can use "Explained variance vs PCA features" figure in the directory to select the optimum number of features. If a user is familiar with the elbow method, they can use "Inertia vs Clusters" figure in the directory to select the optimum number of clusters. 
-- A folder, named 'City_name_Discrete_EF_...' will be generated that contains 5 files. 
-  - One "ParetoFront" figure that shows the cost and emissions trade-off for the different scenarios to minimze cost and emissions. 
-  - One CSV file, "objectives", that represent the cost and CO<sub>2</sub> emissions trade-off for the different scenarios to minimze cost and emissions. This CSV file contains the values that are shown in "ParetoFront" figure. 
-  - Two parallel coordiantes figures, "Parallel_coordinates_cost" and "Parallel_coordinates_emissions", which show the variation in the optimum energy configurations to minimize the total cost and operating CO<sub>2</sub> emissions. 
-  - One CSV file that contains the optimum sizing of five selected energy components in this repository, which are natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, and batteries, to minimize the total cost and operating CO<sub>2</sub> emissions. This CSV file contains all of the values that are used in the two parallel coordiantes figures.
-
+1. Two figures will be generated in the directory related to optimum number of features in PCA and optimum number of clusters in k-medoid algorithm if row 7, 8, and 9 are 'yes'.If a user is familiar with the connection of explained variance and number of features can use "Explained variance vs PCA features" figure in the directory to select the optimum number of features. If a user is familiar with the elbow method, they can use "Inertia vs Clusters" figure in the directory to select the optimum number of clusters. 
+2. A folder, named 'City_name_Discrete_EF_...' will be generated that contains 5 files. 
+  1. One "ParetoFront" figure that shows the cost and emissions trade-off for the different scenarios to minimze cost and emissions. 
+  2. One CSV file, "objectives", that represent the cost and CO<sub>2</sub> emissions trade-off for the different scenarios to minimze cost and emissions. This CSV file contains the values that are shown in "ParetoFront" figure. 
+  3. Two parallel coordiantes figures, "Parallel_coordinates_cost" and "Parallel_coordinates_emissions", which show the variation in the optimum energy configurations to minimize the total cost and operating CO<sub>2</sub> emissions. 
+  4. One CSV file that contains the optimum sizing of five selected energy components in this repository, which are natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, and batteries, to minimize the total cost and operating CO<sub>2</sub> emissions. This CSV file contains all of the values that are used in the two parallel coordiantes figures.
+3.
