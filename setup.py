@@ -1,8 +1,9 @@
+import setuptools
 from setuptools import setup
 
 setup(
     name='two_stage_SP',
-    version='0.0.0',
+    version='0.1.0',
     description='A example Python package',
     url='https://github.com/zahraghh/Two_Stage_SP',
     author='Zahra Ghaemi',
