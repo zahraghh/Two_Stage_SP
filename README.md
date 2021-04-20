@@ -1,5 +1,5 @@
 # Two-Stage Stochastic Programming
-This repository provides a framework to perform two-stage stochastic programming on a district energy system considering uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimze the total cost and operating CO<sub>2</sub> emissions. Six energy components are considered: natural gas boilers, combined heating and power, solar photovoltaic, wind turbines, batteries, and the grid. 
+This repository provides a framework to perform a multi-objective two-stage stochastic programming on a district energy system considering uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimze the total cost and operating CO<sub>2</sub> emissions. Six energy components are considered: natural gas boilers, combined heating and power, solar photovoltaic, wind turbines, batteries, and the grid. 
 
 ## How to Run the File?
 To run the file in this repository, we suggest to use a new conda environment. You can downalod and install anaconda using the following link: https://docs.anaconda.com/anaconda/install/
@@ -22,9 +22,9 @@ Activate two_stage_env environment. This command should change the environment f
 ```
 conda activate two_stage_env
 ```
-Now a new environmnet, two_stage_env, is ready to test the repository. 
+Now a new environmnet, two_stage_env, is ready to test the repository on it. 
 
-Two packages should be installed using the conda command in the two_stage_env environmnet.
+Two packages should be installed using the conda command in the two_stage_env environment.
 
 1. install scikit-learn-extra in the conda environment:
 ```
@@ -37,19 +37,20 @@ conda install glpk --channel conda-forge
 
 Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE.
 
-Unzip the folder and change the directory in the anaconda prompt to the unzipeed folder. 
+Unzip the folder and change the directory in the anaconda prompt to the unziped folder. 
 ```
 cd Path_to_the_folder\Two_Stage_SP-IMECE
 ```
-Now, you can install the package using the pip command and use it as a package in your code.
+Now, you can install the package using the pip command and use it in your code.
 ```
 pip install .
 ```
-Have a look at "Framework Test_University of Utah". These files are needed to compile the "main_two_stage_SP.py" file:
+Have a look at "Framework Test_University of Utah" folder. Four files are needed to succesfully compile the "main_two_stage_SP.py" code:
 - "Energy Components" folder containing energy components charectristics
 - "editable_values.csv' file containing variable inputs of the package
 - "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
 - "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
+
 ## What Can I change?
 Three sets of input data are present that a user can change to test a new case study.
 
