@@ -31,7 +31,7 @@ The "total_energy_demands.csv" file consists of the aggregated hourly electricit
 The "Energy Components" folder consists of the CSV files of the five selected energy components in this repository, which are natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, and batteries. These CSV files for each energy component consists of a series of capacities, efficiencies, investment cost, operation and maintenece cost, and life span of the energy components that are considered in this discrete optimization repository. 
 
 ## What are the Results?
-
+If all parts of the framework is used, which means a user writes 'yes' values for rows 5 to 11 in the "editable_values.csv" file, 
 ## How to Run the File?
 Installing Anaconda
 
