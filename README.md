@@ -37,13 +37,9 @@ conda install glpk --channel conda-forge
 
 Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE.
 
-Unzip the folder and change the directory in the anaconda prompt to the unziped folder. 
+Unzip the folder, and locally install the package using the pip command.
 ```
-cd Path_to_the_folder\Two_Stage_SP-IMECE
-```
-Now, you can install the package using the pip command and use it in your code.
-```
-pip install .
+pip install -e /path/to/package
 ```
 Have a look at "Framework Test_University of Utah" folder. Four files are needed to succesfully compile the "main_two_stage_SP.py" code:
 - "Energy Components" folder containing energy components charectristics
@@ -77,7 +73,7 @@ The "editable_values.csv" consists of four main sections:
 ### total_energy_demands.csv file
 The "total_energy_demands.csv" file consists of the aggregated hourly electricity (kWh), heating (kWh), and cooling (kWh) needs of a group of buildings for a base year, representing the demand side. The user can change the values of electricity, heating, and cooling to their own case study's energy demands. 
 
-### Energy Compoennts folder
+### Energy Components folder
 The "Energy Components" folder consists of the CSV files of the five selected energy components in this repository, which are natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, and batteries. These CSV files for each energy component consist of a series of capacities, efficiencies, investment cost, operation & maintenance cost, and life span of the energy components considered in this discrete optimization repository. A user can modify these values or add more options to their CSV files to expand the decision space. 
 
 ## What are the Results?
