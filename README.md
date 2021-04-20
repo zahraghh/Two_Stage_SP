@@ -41,10 +41,7 @@ Create a new environment for the two-stage stochastic programming optimization
 ```
 conda create -n two_stage_env python=3.7.7
 ```
-and installing a solver that is publicly available:
-```
-conda install glpk --channel conda-forge
-```
+
 Make sure the environment is created. By running this code, the list of available environments, including two_stage_env, should be shown.
 ```
 conda env list
@@ -62,6 +59,10 @@ pip install -r  Path_to_the_folder\Two_Stage_SP-main\requirements.txt
 and install scikit-learn-extra using the conda environment to use in the k-medoid clustering algorithm
 ```
 conda install -c conda-forge scikit-learn-extra
+```
+and installing a solver that is publicly available:
+```
+conda install glpk --channel conda-forge
 ```
 To run the two-stage stochastic optimization, you should directly compile the main_twostage_SP.py file. Run the Python file after making sure the inputs in the editable_values.csv, Total_energy_demands.csv, and CSV files in the Energy Components are based on your need.
 ```
