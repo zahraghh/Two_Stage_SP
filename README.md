@@ -22,14 +22,9 @@ Activate two_stage_env environment. This command should change the environment f
 ```
 conda activate two_stage_env
 ```
-Now a new environmnet,two_stage_env, is ready to test the repository. 
+Now a new environmnet, two_stage_env, is ready to test the repository. 
 
-Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE or you can download the file in your directory using this line in anaconda prompt:
-```
-git clone https://github.com/zahraghh/Two_Stage_SP.git
-```
-
-Two packages should be installed using the conda command.
+Two packages should be installed using the conda command in the two_stage_env environmnet.
 
 1. install scikit-learn-extra in the conda environment:
 ```
@@ -39,10 +34,22 @@ conda install -c conda-forge scikit-learn-extra
 ```
 conda install glpk --channel conda-forge
 ```
-To run the two-stage stochastic optimization, you should directly compile the main_twostage_SP.py file. Run the Python file after making sure the inputs in the editable_values.csv, Total_energy_demands.csv, and CSV files in the Energy Components are based on your need.
+
+Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE.
+
+Unzip the folder and change the directory in the anaconda prompt to the unzipeed folder. 
 ```
-python Path_to_the_folder\Two_Stage_SP-main\main_twostage_SP.py
+cd Path_to_the_folder\Two_Stage_SP-IMECE
 ```
+Now, you can install the package using the pip command and use it as a package in your code.
+```
+pip install .
+```
+Have a look at "Framework Test_University of Utah". These files are needed to compile the "main_two_stage_SP.py" file:
+- "Energy Components" folder containing energy components charectristics
+- "editable_values.csv' file containing variable inputs of the package
+- "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
+- "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
 ## What Can I change?
 Three sets of input data are present that a user can change to test a new case study.
 
