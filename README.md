@@ -74,4 +74,4 @@ If all parts of the framework is used, which means a user writes 'yes' values fo
   2. One CSV file, "objectives", that represent the cost and CO<sub>2</sub> emissions trade-off for the different scenarios to minimze cost and emissions. This CSV file contains the values that are shown in "ParetoFront" figure. 
   3. Two parallel coordiantes figures, "Parallel_coordinates_cost" and "Parallel_coordinates_emissions", which show the variation in the optimum energy configurations to minimize the total cost and operating CO<sub>2</sub> emissions. 
   4. One CSV file that contains the optimum sizing of five selected energy components in this repository, which are natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, and batteries, to minimize the total cost and operating CO<sub>2</sub> emissions. This CSV file contains all of the values that are used in the two parallel coordiantes figures.
-3.
+3. here
