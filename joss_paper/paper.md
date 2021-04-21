@@ -29,7 +29,7 @@ aas-journal: ASME International Mechanical Engineering Congress and Exposition
 ---
 
 # Summary
-Two_stage_SP package optimizes sizing of energy components for a district energy system. This package considers five selected energy components: natural gas boilers, combined heating and power, solar photovoltaics, wind turbines, and batteries. These five energy components and the grid can provide heating, cooling, and electricity needs of a group of buildings. Uncertainties in energy demand, solar irradiance, wind speed, and electricity emissions are considered in this framewrok. A user can change the case study's location, modify the energy components' charectristics, and 
+Two_stage_SP package optimizes sizing of energy components for a district energy system. This package considers five selected energy components: natural gas boilers, combined heating and power, solar photovoltaics, wind turbines, and batteries. These five energy components and the grid can provide heating, cooling, and electricity needs of a group of buildings. Uncertainties in energy demand, solar irradiance, wind speed, and electricity emissions are considered in this package. A user can change the case study's location, modify the energy components' charectristics, and energy configuration. 
 
 
 # Statement of need
