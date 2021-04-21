@@ -29,8 +29,9 @@ aas-journal: ASME International Mechanical Engineering Congress and Exposition
 ---
 
 # Summary
-Two_stage_SP package optimizes sizing of energy components for a district energy system. This package considers five selected energy components: natural gas boilers, combined heating and power, solar photovoltaics, wind turbines, and batteries. These five energy components and the grid can provide heating, cooling, and electricity needs of a group of buildings. Uncertainties in energy demand, solar irradiance, wind speed, and electricity emissions are considered in this package. A user can change the case study's location, modify the energy components' charectristics, and energy configuration. 
+Two_stage_SP package optimizes the sizing of energy components for a district energy system. This package considers five selected energy components: natural gas boilers, combined heating and power, solar photovoltaics, wind turbines, and batteries. These five energy components and the grid can provide the heating, cooling, and electricity needs of a group of buildings. Uncertainties in energy demand, solar irradiance, wind speed, and electricity emissions are considered in this package. A user can change the case study's location, modify the energy components' characteristics, and energy configuration. 
 
+This framework has four main sections. In the first section, actual weather data from National Solar Radiation Database (NSRDB) is downloaded, and global tilted irradiance is quantfiied per unit of a tilted flat plate, representing solar photovoltaics arrays. In the second section, uncertainties in energy demnads, solar irradiance, wind speed, and electricity emissions are considered by generating new scenarios with different values of energy demnads, solar irradiance, wind speed, and electricity emissions.
 
 # Statement of need
 
