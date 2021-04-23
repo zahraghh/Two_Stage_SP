@@ -12,7 +12,7 @@ from Two_Stage_SP import download_windsolar_data, GTI,uncertainty_analysis,scena
 if __name__ == "__main__":
     editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
     editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-    city_DES ='/'+ str(editable_data['city'])
+    city_DES =str(editable_data['city'])
     state = editable_data['State']
     #Do we need to generate the meteorlogical data and their distributions?
     if editable_data['Weather data download and analysis']=='yes':
