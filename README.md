@@ -24,22 +24,31 @@ conda activate two_stage_env
 ```
 Now a new environment, two_stage_env, is ready to test the repository on it. 
 
-Two packages should be installed using the conda command in the two_stage_env environment.
+Two packages should be installed using the conda or PyPI.
 
-1. install scikit-learn-extra in the conda environment:
+1. install scikit-learn-extra either in conda environment:
 ```
-conda install -c conda-forge scikit-learn-extra
+conda install -c conda-forge scikit-learn-extra 
 ```
-2. install a solver that is available for public use:
+or from PyPI:
+```
+pip install scikit-learn-extra
+
+```
+2. install a solver that is available for public use either in conda environmnet:
 ```
 conda install glpk --channel conda-forge
 ```
-
-Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE.
-
-Unzip the "Two_Stage_SP-IMECE" folder and locally install the package using the pip command. The /path/to/Two_Stage_SP-IMECE is the path to the "Two_Stage_SP-IMECE" folder that contains a setup.py file. 
+or from PyPI:
 ```
-pip install -e /path/to/Two_Stage_SP-IMECE
+pip install glpk
+```
+
+Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/main.
+
+Unzip the "Two_Stage_SP-main" folder and locally install the package using the pip command. The /path/to/Two_Stage_SP-main is the path to the "Two_Stage_SP-main" folder that contains a setup.py file. 
+```
+pip install -e /path/to/Two_Stage_SP-main
 ```
 
 To use this repository, you should directly compile the "main_two_stage_SP.py" code in the "Framework Test_University of Utah" folder.
