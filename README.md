@@ -45,9 +45,9 @@ pip install -e /path/to/Two_Stage_SP-IMECE
 To use this repository, you should directly compile the "main_two_stage_SP.py" code in the "Framework Test_University of Utah" folder.
 
 Have a look at the "Framework Test_University of Utah" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
-1. "Energy Components" folder containing energy components characteristics
-2. "editable_values.csv' file containing variable inputs of the package
-3. "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
+1. "editable_values.csv' file containing variable inputs of the package
+2. "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
+3. "Energy Components" folder containing energy components characteristics
 4. "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
 
 ## What Can I change?
