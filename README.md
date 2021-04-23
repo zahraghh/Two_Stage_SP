@@ -39,7 +39,7 @@ Download the ZIP file of this repository from this link: https://github.com/zahr
 
 Unzip the "Two_Stage_SP-IMECE" folder and locally install the package using the pip command. The /path/to/Two_Stage_SP-IMECE is the path to the "Two_Stage_SP-IMECE" folder that contains a setup.py file. 
 ```
-pip install -e /path/to/Two_Stage_SP-IMECE
+pip install -r  /path/to/Two_Stage_SP-IMECE/requirements.txt
 ```
 
 To use this repository, you should directly compile the "main_two_stage_SP.py" code in the "Framework Test_University of Utah" folder.
