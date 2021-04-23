@@ -10,7 +10,7 @@ Two packages should be installed using the conda or PyPI.
 ```
 conda install -c conda-forge scikit-learn-extra 
 ```
-or from PiPy:
+or from PyPI:
 ```
 pip install scikit-learn-extra
 
@@ -19,7 +19,7 @@ pip install scikit-learn-extra
 ```
 conda install glpk --channel conda-forge
 ```
-or from PiPy:
+or from PyPI:
 ```
 pip install glpk
 
