@@ -45,13 +45,13 @@ if __name__ == "__main__":
     #Do we need to generate Pareto-front and parallel coordinates plots for the results?
     if editable_data['Visualizing the final results']=='yes':
         from Two_Stage_SP.plot_results_design import parallel_plots,ParetoFront_EFs
-        file_name = city_DES+'_Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors/'
-        results_path = os.path.join(sys.path[0]) + file_name
+        file_name = city_DES+'_Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors'
+        results_path = os.path.join(sys.path[0], file_name)
         if not os.path.exists(results_path):
             print('The results folder is not available. Please, generate the results first')
             sys.exit()
         Two_Stage_SP.plot_results_design.ParetoFront_EFs()
         Two_Stage_SP.plot_results_design.parallel_plots('cost')
         Two_Stage_SP.plot_results_design.parallel_plots('emissions')
-        file_name = editable_data['city']+'_Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors/'
+        file_name = editable_data['city']+'_Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors'
         print('Plots are generated in the '+ file_name+' folder')
