@@ -19,16 +19,9 @@ import sys
 import pandas as pd
 import csv
 import PySAM.ResourceTools as tools
-editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
-editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-city = editable_data['city']
-folder_path = os.path.join(sys.path[0],str(city))
-#Location Coordinates
-lat = float(editable_data['Latitude'])
-lon = float(editable_data['Longitude'])
 
 weather_data = {}
-def uncertain_input(type_input,number_weatherfile):
+def uncertain_input(type_input,number_weatherfile,path_test):
     uncertain_dist =  defaultdict(list)
     uncertain_input = {}
     for year in range(int(editable_data['starting_year']),int(editable_data['ending_year'])+1):
@@ -69,7 +62,7 @@ def best_fit_distribution(data,  ax=None):
       # fit dist to data
       params = distribution.fit(data)
 
-      #warnings.filterwarnings("ignore")
+      warnings.filterwarnings("ignore")
       # Separate parts of parameters
       arg = params[:-2]
       loc = params[-2]
@@ -119,8 +112,15 @@ def to_percent(nplt,position, k):
     else:
         return s + '%'
 # Find best fit distribution
-def probability_distribution(name,column_number):
-    dict_data = uncertain_input(name,column_number)
+def probability_distribution(name,column_number,path_test):
+    global editable_data_path, editable_data, lat, lon, city,folder_path
+    editable_data_path =os.path.join(path_test, 'editable_values.csv')
+    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
+    lat = float(editable_data['Latitude'])
+    lon = float(editable_data['Longitude'])
+    city = editable_data['city']
+    folder_path = os.path.join(sys.path[0],str(city))
+    dict_data = uncertain_input(name,column_number,path_test)
     best_fit_input = defaultdict(list)
     df_object = {}
     df_object_all  = pd.DataFrame(columns = ['Index in year','Best fit','Best loc','Best scale','Mean','STD'])
@@ -138,4 +138,5 @@ def probability_distribution(name,column_number):
         'STD': np.std(data)}
         df_object[key] =  pd.DataFrame(data_frame_input,index=[0])
         df_object_all =  df_object_all.append(df_object[key])
-    df_object_all.to_csv(os.path.join(folder_path , 'best_fit_'+name+'.csv'))
+    df_object_all.to_csv(os.path.join(folder_path, 'best_fit_'+name+'.csv'))
+probability_distribution('GTI',46,sys.path[0]) #Name and the column number in the weather data
