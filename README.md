@@ -2,8 +2,7 @@
 This repository provides a framework to perform multi-objective two-stage stochastic programming on a district energy system. In this framework, we consider uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimize the total cost and operating CO<sub>2</sub> emissions. Natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, batteries, and the grid are the energy components considered in this repository. 
 
 ## How Can I Use this Repository?
-To use this repository, you can download and install anaconda using the following link: https://docs.anaconda.com/anaconda/install/.
-
+To use this repository, you need to use either Python or Anaconda. You can download and install Python using https://www.python.org/downloads/ or Anaconda using the following  https://docs.anaconda.com/anaconda/install/. 
 
 Two packages should be installed using the conda or PyPI.
 
@@ -31,8 +30,6 @@ Unzip the "Two_Stage_SP-IMECE" folder and install the required packages using th
 ```
 pip install -r  /path/to/Two_Stage_SP-IMECE/requirements.txt
 ```
-
-To use this repository, you should directly compile the "main_two_stage_SP.py" code in the "Framework Test_University of Utah" folder.
 
 Have a look at the "Framework Test_University of Utah" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
 1. "Energy Components" folder containing energy components characteristics
