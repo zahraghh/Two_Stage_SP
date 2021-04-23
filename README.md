@@ -39,7 +39,11 @@ pip install scikit-learn-extra
 ```
 conda install glpk --channel conda-forge
 ```
+or from PiPy:
+```
+pip install glpk
 
+```
 Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE.
 
 Unzip the "Two_Stage_SP-IMECE" folder and locally install the package using the pip command. The /path/to/Two_Stage_SP-IMECE is the path to the "Two_Stage_SP-IMECE" folder that contains a setup.py file. 
