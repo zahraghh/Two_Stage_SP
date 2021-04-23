@@ -3,7 +3,7 @@ Names (do not change this column),Values,Instruction,Where it's used
 ################                  Setting Up the Framework                ###################,,,
 #########################################################################,,,
 Weather data download and analysis,yes,"Downloading data for the city from NSRDB? (yes or no) if yes, please, fill rows 15 to 28. The yes/no question is case sensitive. Please, make sure 'yes' is written without a space or capital letter.",Setting up the framework
-Generate Scenarios,yes,"Generating scenarios based on the probability distributions? (yes or no) if yes, please, fill row 32.  The yes/no question is case sensitive. Please, make sure 'yes' is written without a space or capital letter.",Setting up the framework
+Generate Scenarios,yes,"Generating scenarios based on the probability distributions? (yes or no) if yes, please, fill row 32 to 34.  The yes/no question is case sensitive. Please, make sure 'yes' is written without a space or capital letter.",Setting up the framework
 Perfrom scenario reduction,yes,"Scneario reduction using k-medoid and PCA? (yes or no) if yes, please, fill rows  33 and 34. The yes/no question is case sensitive. Please, make sure 'yes' is written without a space or capital letter.",Setting up the framework
 Search optimum PCA,no,"Finding the optimum number of features in Principal component analysis (PCA)? (yes or no) if yes, row 7, 'Perfrom scenario reduction' must be yes.  if yes, a figure that can help to fill row 33 will be generated in the directory. The yes/no question is case sensitive. Please, make sure 'yes' is written without a space or capital letter.",Setting up the framework
 Search optimum clusters,no,"Finding the optimum number of clusters in k-medoid? (yes or no) if yes, a figure that can help to fill row 34 will be generated in the directory. if yes, row 7, 'Perfrom scenario reduction' must be yes.  The yes/no question is case sensitive. Please, make sure 'yes' is written without a space or capital letter.",Setting up the framework
@@ -36,7 +36,7 @@ Cluster numbers,9,Optimum number of clusters. This number +2 gives the number of
 #############            District Energy System Optimization                 ################,,,
 #########################################################################,,,
 city EF,1593,"city's electricity generation emission factor  (lbs/MWh). For U.S. case studies, you can find the electricity generation emission factors at state level here: https://www.eia.gov/electricity/state/'",District energy system's charecteristics
-renewable percentage,0,"What percentage of city's electricity emission factor should be used? For example,  0.7  value means electricity generation emission factor = city EF * 0.7",District energy system's charecteristics
+renewable percentage,0.29,"What percentage of city's electricity emission factor should be used? For example,  0.7  value means electricity generation emission factor = city EF * 0.7",District energy system's charecteristics
 price_NG,4.99,Constant price of natural gas ($/cubic-ft),District energy system's charecteristics
 electricity_price,6.8,Constant price of electricity (cent/kWh),District energy system's charecteristics
 lifespan_project,20,Lifespan of the disrict energy system (years),District energy system's charecteristics
