@@ -13,7 +13,6 @@ conda install -c conda-forge scikit-learn-extra
 or from PyPI:
 ```
 pip install scikit-learn-extra
-
 ```
 2. install a solver that is available for public use either in conda environmnet:
 ```
