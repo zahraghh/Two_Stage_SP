@@ -31,9 +31,9 @@ Unzip the "Two_Stage_SP-IMECE" folder and install the required packages using th
 pip install -r /path/to/Two_Stage_SP-IMECE/requirements.txt
 ```
 
-Now, the settings are ready to test this repository. The test folder should be inside 
+Now, the setting is ready to test this repository. The test folder should be inside the Two_Stage_SP folder. For example, Case 1_code folder shows an example to test the repository. 
 
-Have a look at the "Framework Test_University of Utah" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
+Have a look at the "Case 1_code" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
 1. "Energy Components" folder containing energy components characteristics
 2. "editable_values.csv' file containing variable inputs of the package
 3. "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
