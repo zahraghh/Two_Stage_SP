@@ -9,9 +9,9 @@ import Two_Stage_SP
 from Two_Stage_SP.EGEF import EF,printinfo,fit_and_plot,EGEF_state,best_fit_distribution
 editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-city = '/'+editable_data['city']
-folder_path = os.path.join(sys.path[0])+str(city)
-save_path = os.path.join(sys.path[0]) + str('\Scenario Generation')+city
+city = editable_data['city']
+folder_path = os.path.join(sys.path[0],str(city))
+save_path = os.path.join(sys.path[0], 'Scenario Generation',city)
 if not os.path.exists(save_path):
     os.makedirs(save_path)
 lbstokg_convert = 0.453592 #1 lb = 0.453592 kg
@@ -22,11 +22,11 @@ def scenario_generation_results(state=None):
     lon = float(editable_data['Longitude'])
     year = int(editable_data['ending_year']) #Getting the last year of wind and solar data from NSRDB
     info_name =city+'_'+str(lat)+'_'+str(lon)+'_psm3_60_'+str(year)+'.csv'
-    weather_data = pd.read_csv(folder_path+info_name, header=None)[2:]
-    GTI_distribution = pd.read_csv(folder_path+'/best_fit_GTI.csv')
-    wind_speed_distribution = pd.read_csv(folder_path+'/best_fit_wind_speed.csv')
-    energy_data = pd.read_csv(os.path.join(sys.path[0])+'/total_energy_demands.csv')
-    weather_data = pd.read_csv(folder_path+info_name, header=None)[2:]
+    weather_data = pd.read_csv(os.path.join(folder_path,info_name), header=None)[2:]
+    GTI_distribution = pd.read_csv(os.path.join(folder_path,'best_fit_GTI.csv'))
+    wind_speed_distribution = pd.read_csv(os.path.join(folder_path,'best_fit_wind_speed.csv'))
+    energy_data = pd.read_csv(os.path.join(sys.path[0],'total_energy_demands.csv'))
+    weather_data = pd.read_csv(os.path.join(folder_path,info_name), header=None)[2:]
     GTI = [float(i) for i in list(weather_data[46])]
     wind_speed = [float(i) for i in list(weather_data[8])]
     energy_demand_scenario = {}
@@ -140,4 +140,4 @@ def scenario_generation_results(state=None):
                             'Electricity Emission Factor': electricity_emissions_scenario[i_emission]
                             }
                     df_scenario_generated=pd.DataFrame(scenario_genrated['D:'+i_demand+'/S:'+i_solar+'/W:'+i_wind+'/C:'+i_emission])
-                    df_scenario_generated.to_csv(save_path + '\D_'+i_demand+'_S_'+i_solar+'_W_'+i_wind+'_C_'+i_emission+'.csv', index=False)
+                    df_scenario_generated.to_csv(os.path.join(save_path , 'D_'+i_demand+'_S_'+i_solar+'_W_'+i_wind+'_C_'+i_emission+'.csv'), index=False)

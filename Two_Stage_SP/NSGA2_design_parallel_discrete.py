@@ -12,10 +12,10 @@ from collections import defaultdict
 import os
 import sys
 from pathlib import Path
-components_path = os.path.join(sys.path[0])+'/Energy Components/'
+components_path = os.path.join(sys.path[0],'Energy Components')
 editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-city = '/'+editable_data['city']
+city = editable_data['city']
 num_components = 0
 use_solar_PV = editable_data['Solar_PV']
 use_wind_turbine = editable_data['Wind_turbines']
@@ -23,7 +23,7 @@ use_battery = editable_data['Battery']
 use_grid = editable_data['Grid']
 use_CHP = editable_data['CHP']
 use_boilers = editable_data['Boiler']
-representative_days_path = os.path.join(sys.path[0])+ '\Scenario Generation'+city+ '\Representative days'
+representative_days_path = os.path.join(sys.path[0], 'Scenario Generation',city, 'Representative days')
 import Two_Stage_SP
 from Two_Stage_SP.battery import battery_calc
 from Two_Stage_SP.boilers import NG_boiler
@@ -33,20 +33,20 @@ from Two_Stage_SP.wind_turbine import wind_turbine_calc
 renewable_percentage = float(editable_data['renewable percentage'])  #Amount of renewables at the U (100% --> 1,mix of 43% grid--> 0.463, mix of 29% grid--> 0.29, 100% renewables -->0)
 if use_boilers=='yes':
     num_components +=1
-    boiler_component = pd.read_csv(components_path+'boilers.csv')
+    boiler_component = pd.read_csv(os.path.join(components_path,'boilers.csv'))
 if use_CHP=='yes':
     num_components +=1
-    CHP_component = pd.read_csv(components_path+'CHP.csv')
+    CHP_component = pd.read_csv(os.path.join(components_path,'CHP.csv'))
 if use_solar_PV=='yes':
     num_components +=1
     PV_module = float(editable_data['PV_module']) #area of each commercial PV moduel is 1.7 M^2
     roof_top_area = float(editable_data['roof_top_area']) #60% percentage of the rooftop area of all buildings https://www.nrel.gov/docs/fy16osti/65298.pdf
 if use_wind_turbine=='yes':
     num_components +=1
-    wind_component = pd.read_csv(components_path+'wind_turbine.csv')
+    wind_component = pd.read_csv(os.path.join(components_path,'wind_turbine.csv'))
 if use_battery=='yes':
     num_components +=1
-    battery_component = pd.read_csv(components_path+'battery.csv')
+    battery_component = pd.read_csv(os.path.join(components_path,'battery.csv'))
 ###System Parameters## #
 year = int(editable_data['ending_year'])
 electricity_prices =  float(editable_data['electricity_price'])/100 #6.8cents/kWh in Utah -->$/kWh CHANGE
@@ -124,7 +124,7 @@ class TwoStageOpt(Problem):
         representative_day = {}
         for represent in range(num_clusters):
             E_bat = {}
-            representative_day[represent] = pd.read_csv(representative_days_path +'\Represent_days_modified_'+str(represent)+'.csv')
+            representative_day[represent] = pd.read_csv(os.path.join(representative_days_path,'Represent_days_modified_'+str(represent)+'.csv'))
             self.G_T = list(representative_day[represent]['GTI (Wh/m^2)']) #Global Tilted Irradiation (Wh/m^2) in Slat Lake City from TMY3 file for 8760 hr a year on a titled surface 35 deg
             self.V_wind = list(representative_day[represent]['Wind Speed (m/s)']) #Wind Speed m/s in Slat Lake City from AMY file for 8760 hr in 2019
             electricity_demand = representative_day[represent]['Electricity total (kWh)'] #kWh
@@ -222,7 +222,7 @@ class TwoStageOpt(Problem):
         electricity_demand_total = defaultdict(list)
         heating_demand_total = defaultdict(list)
         for represent in range(num_clusters):
-            representative_day_max[represent] = pd.read_csv(representative_days_path +'\Represent_days_modified_'+str(represent)+'.csv')
+            representative_day_max[represent] = pd.read_csv(os.path.join(representative_days_path,'Represent_days_modified_'+str(represent)+'.csv'))
             probability_represent = representative_day_max[represent]['Percent %'][0] #probability that representative day happens
             num_days_represent = probability_represent*365/100 #Number of days in a year that representative day represent :)
             electricity_demand = representative_day_max[represent]['Electricity total (kWh)'] #kWh
@@ -328,8 +328,8 @@ def results_extraction(problem, algorithm):
         df_cost[i] = pd.DataFrame(data_cost,index=[0])
         df_cost_all =  df_cost_all.append(df_cost[i])
         i += 1
-    df_object_all.to_csv(results_path + '/objectives.csv')
-    df_operation_all.to_csv(results_path + '/sizing_all.csv')
+    df_object_all.to_csv(os.path.join(results_path , 'objectives.csv'))
+    df_operation_all.to_csv(os.path.join(results_path , 'sizing_all.csv'))
     #df_cost_all.to_csv(results_path + '/cost_all.csv')
 
     plt.scatter([s.objectives[0] for s in algorithm.result],

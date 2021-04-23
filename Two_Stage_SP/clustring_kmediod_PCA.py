@@ -21,14 +21,14 @@ from nested_dict import nested_dict
 def kmedoid_clusters():
     editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
     editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-    city = '/'+editable_data['city']
-    save_path = os.path.join(sys.path[0]) + str('\Scenario Generation') + city
-    representative_days_path =  save_path+str('\Representative days')
+    city = editable_data['city']
+    save_path = os.path.join(sys.path[0],'Scenario Generation', city)
+    representative_days_path = os.path.join(save_path,'Representative days')
     if not os.path.exists(representative_days_path):
         os.makedirs(representative_days_path)
-    folder_path = os.path.join(sys.path[0])+str(city)
-    GTI_distribution = pd.read_csv(folder_path+'/best_fit_GTI.csv')
-    wind_speed_distribution = pd.read_csv(folder_path+'/best_fit_wind_speed.csv')
+    folder_path = os.path.join(sys.path[0],str(city))
+    GTI_distribution = pd.read_csv(os.path.join(folder_path,'best_fit_GTI.csv'))
+    wind_speed_distribution = pd.read_csv(os.path.join(folder_path,'best_fit_wind_speed.csv'))
     range_data = ['low','medium','high']
     scenario_genrated = {}
     scenario_probability = defaultdict(list)
@@ -102,7 +102,7 @@ def kmedoid_clusters():
 
                     scenario_number['D:'+i_demand+'/S:'+i_solar+'/W:'+i_wind+'/C:'+i_emission]=  num_scenario
                     num_scenario = num_scenario + 1
-                    scenario_genrated['D:'+i_demand+'/S:'+i_solar+'/W:'+i_wind+'/C:'+i_emission] = pd.read_csv(save_path + '\D_'+i_demand+'_S_'+i_solar+'_W_'+i_wind+'_C_'+i_emission+'.csv', header=None)
+                    scenario_genrated['D:'+i_demand+'/S:'+i_solar+'/W:'+i_wind+'/C:'+i_emission] = pd.read_csv(os.path.join(save_path, 'D_'+i_demand+'_S_'+i_solar+'_W_'+i_wind+'_C_'+i_emission+'.csv'), header=None)
     features_scenarios = defaultdict(list)
     features_scenarios_list = []
     features_probability_list = []
@@ -152,7 +152,7 @@ def kmedoid_clusters():
         ax.set_ylabel('Cumulative explained variance',fontsize=BIGGER_SIZE)
         ax.set_xticks(features)
         ax.set_title('The user should set a limit on the explained variance value and then, select the optimum number of PCA features',fontsize=BIGGER_SIZE)
-        plt.savefig(os.path.join(sys.path[0]) + '\Explained variance vs PCA features.png',dpi=300,facecolor='w')
+        plt.savefig(os.path.join(sys.path[0],'Explained variance vs PCA features.png'),dpi=300,facecolor='w')
         plt.close()
         print('"Explained variance vs PCA features" figure is saved in the directory folder')
         print('You can use the figure to select the optimum number of features' )
@@ -176,7 +176,7 @@ def kmedoid_clusters():
         ax.set_title('The user should use "Elbow method" to select the number of optimum clusters',fontsize=BIGGER_SIZE)
         ax.plot(list(cluster_range),inertia_list)
         ax.set_xticks(np.arange(2,20,1))
-        plt.savefig(os.path.join(sys.path[0]) + '\Inertia vs Clusters.png',dpi=300,facecolor='w')
+        plt.savefig(os.path.join(sys.path[0], 'Inertia vs Clusters.png'),dpi=300,facecolor='w')
         plt.close()
         print('"Inertia vs Clusters" figure is saved in the directory folder')
         print('You can use the figure to select the optimum number of clusters' )
@@ -233,8 +233,8 @@ def kmedoid_clusters():
         data_labels['labels '+str(scenario)]= scores_pca_list[scenario]
     df_clusters= pd.DataFrame(clusters)
     df_labels = pd.DataFrame(data_labels)
-    df_clusters.to_csv(representative_days_path + '\cluster_centers_C_'+str(len(kmedoids.cluster_centers_))+'_L_'+str(len(kmedoids.labels_))+'.csv', index=False)
-    df_labels.to_csv(representative_days_path + '\labels_C_'+str(len(kmedoids.cluster_centers_))+'_L_'+str(len(kmedoids.labels_))+'.csv', index=False)
+    df_clusters.to_csv(os.path.join(representative_days_path, 'cluster_centers_C_'+str(len(kmedoids.cluster_centers_))+'_L_'+str(len(kmedoids.labels_))+'.csv'), index=False)
+    df_labels.to_csv(os.path.join(representative_days_path, 'labels_C_'+str(len(kmedoids.cluster_centers_))+'_L_'+str(len(kmedoids.labels_))+'.csv'), index=False)
 
     #Reversing PCA using two methods:
     #Reversing the cluster centers using method 1 (their results are the same)
@@ -289,7 +289,7 @@ def kmedoid_clusters():
         'Percent %': round(sum_probability[representative_day]*100/sum(sum_probability),4)}
         #print(np.mean(Scenario_generated_new[representative_day][0:24]))
         df_represent_days_modified=pd.DataFrame(data_represent_days_modified)
-        df_represent_days_modified.to_csv(representative_days_path+'\Represent_days_modified_'+str(representative_day)+ '.csv', index=False)
+        df_represent_days_modified.to_csv(os.path.join(representative_days_path,'Represent_days_modified_'+str(representative_day)+ '.csv'), index=False)
 
     print('cluster evaluation starts')
     max_heating_scenarios_nested = nested_dict()

@@ -9,16 +9,16 @@ import sys
 data_path = {}
 editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-city ='/'+ str(editable_data['city'])
+city =str(editable_data['city'])
 file_name = city+'_Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors/'
-results_path = os.path.join(sys.path[0]) + file_name
+results_path = os.path.join(sys.path[0], file_name)
 scatter_data = {}
 scatter_data_modified={}
 label_data = {}
 cost = {}
 emissions = {}
-scatter_data = pd.read_csv(results_path + 'objectives.csv')
-label_data = pd.read_csv(results_path + 'sizing_all.csv')
+scatter_data = pd.read_csv(os.path.join(results_path , 'objectives.csv'))
+label_data = pd.read_csv(os.path.join(results_path , 'sizing_all.csv'))
 cost = [i/10**6 for i in scatter_data['Cost ($)']]
 emissions = [j/10**6 for j in scatter_data['Emission (kg CO2)']]
 SMALL_SIZE = 12
@@ -45,7 +45,7 @@ def ParetoFront_EFs():
     plt.title('Cost and emissions trade-off')
     plt.xlabel("Cost (million $)")
     plt.ylabel("Emissions (million kg $CO_2$)")
-    plt.savefig(results_path +'ParetoFront.png',dpi=300,facecolor='w')
+    plt.savefig(os.path.join(results_path ,'ParetoFront.png'),dpi=300,facecolor='w')
 ### Parallel coordinates plot of the sizings
 #Ref: https://coderzcolumn.com/tutorials/data-science/how-to-plot-parallel-coordinates-plot-in-python-matplotlib-plotly
 def parallel_plots(type_plot):
@@ -68,4 +68,4 @@ def parallel_plots(type_plot):
             size=18,
         )
     )
-    fig_new.write_image(results_path+'Parallel_coordinates_'+type_plot+'.png',width=680, height=450,scale=3)
+    fig_new.write_image(os.path.join(results_path,'Parallel_coordinates_'+type_plot+'.png'),width=680, height=450,scale=3)

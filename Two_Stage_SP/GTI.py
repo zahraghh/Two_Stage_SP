@@ -20,7 +20,7 @@ class GTI_class:
         self.city = _city
         self.year = _year
         self.info_name =self.city+'_'+str(lat)+'_'+str(lon)+'_psm3_60_'+str(self.year)+'.csv'
-        self.weather_data = pd.read_csv(folder_path+self.info_name, header=None)[2:]
+        self.weather_data = pd.read_csv(os.path.join(folder_path,self.info_name), header=None)[2:]
     def process_gti(self):
         DNI= self.weather_data[5]
         DHI = self.weather_data[6]
@@ -39,15 +39,15 @@ class GTI_class:
                                      model='isotropic',
                                      model_perez='allsitescomposite1990'))
             poa_global.append(poa_components_vector[i]['poa_global'])
-        csv_input = pd.read_csv(folder_path+self.info_name, header=None)[2:]
+        csv_input = pd.read_csv(os.path.join(folder_path,self.info_name), header=None)[2:]
         poa_global.insert(0,'GTI')
         csv_input['ghi'] = poa_global
-        csv_input.to_csv(folder_path+self.info_name, index=False)
+        csv_input.to_csv(os.path.join(folder_path,self.info_name), index=False)
         return poa_global
 def GTI_results(city_DES):
     city = city_DES
     global folder_path
-    folder_path = os.path.join(sys.path[0])+str(city_DES)
+    folder_path = os.path.join(sys.path[0],str(city_DES))
     for year in range(int(editable_data['starting_year']),int(editable_data['ending_year'])+1):
         print('Calculating the global tilted irradiance on a surface in '+editable_data['city']+' in '+str(year))
         weather_year = GTI_class(year,city)

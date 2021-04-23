@@ -21,8 +21,8 @@ import csv
 import PySAM.ResourceTools as tools
 editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-city = '/'+editable_data['city']
-folder_path = os.path.join(sys.path[0])+str(city)
+city = editable_data['city']
+folder_path = os.path.join(sys.path[0],str(city))
 #Location Coordinates
 lat = float(editable_data['Latitude'])
 lon = float(editable_data['Longitude'])
@@ -32,7 +32,7 @@ def uncertain_input(type_input,number_weatherfile):
     uncertain_dist =  defaultdict(list)
     uncertain_input = {}
     for year in range(int(editable_data['starting_year']),int(editable_data['ending_year'])+1):
-        weather_data[year] = pd.read_csv(folder_path+city+'_'+str(lat)+'_'+str(lon)+'_psm3_60_'+str(year)+'.csv', header=None)[2:]
+        weather_data[year] = pd.read_csv(os.path.join(folder_path,city+'_'+str(lat)+'_'+str(lon)+'_psm3_60_'+str(year)+'.csv'), header=None)[2:]
         uncertain_input[year] = weather_data[year][number_weatherfile]
         for index_in_year in range(2,8762):
             uncertain_dist[index_in_year-2].append(float(uncertain_input[year][index_in_year]))
@@ -138,4 +138,4 @@ def probability_distribution(name,column_number):
         'STD': np.std(data)}
         df_object[key] =  pd.DataFrame(data_frame_input,index=[0])
         df_object_all =  df_object_all.append(df_object[key])
-    df_object_all.to_csv(folder_path + '/best_fit_'+name+'.csv')
+    df_object_all.to_csv(os.path.join(folder_path , 'best_fit_'+name+'.csv'))

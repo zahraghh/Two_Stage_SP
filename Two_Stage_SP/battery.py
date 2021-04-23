@@ -10,8 +10,8 @@ from Two_Stage_SP.solar_PV import solar_pv_calc
 from Two_Stage_SP.wind_turbine import wind_turbine_calc
 editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-components_path = os.path.join(sys.path[0])+'/Energy Components/'
-battery_component = pd.read_csv(components_path+'battery.csv')
+components_path = os.path.join(sys.path[0],'Energy Components')
+battery_component = pd.read_csv(os.path.join(components_path,'battery.csv'))
 UPV_maintenance = float(editable_data['UPV_maintenance']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 7
 lifespan_project = float(editable_data['lifespan_project']) #life span of DES
 deltat = 1 #hour for batteries

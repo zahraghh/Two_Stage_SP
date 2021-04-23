@@ -7,8 +7,8 @@ import sys
 from pathlib import Path
 editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-components_path = os.path.join(sys.path[0])+'/Energy Components/'
-solar_component = pd.read_csv(components_path+'/solar_PV.csv')
+components_path = os.path.join(sys.path[0],'Energy Components')
+solar_component = pd.read_csv(os.path.join(components_path,'solar_PV.csv'))
 lifespan_solar = int(solar_component['Lifespan (year)'][0]) #lifespan of solar PV System
 lifespan_project = float(editable_data['lifespan_project']) #life span of DES
 UPV_maintenance = float(editable_data['UPV_maintenance']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 7

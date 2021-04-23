@@ -10,8 +10,8 @@ BTUtokWh_convert = 0.000293071 # 1BTU = 0.000293071 kWh
 mmBTutoBTU_convert = 10**6
 editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-components_path = os.path.join(sys.path[0])+'/Energy Components/'
-boiler_component = pd.read_csv(components_path+'/boilers.csv')
+components_path = os.path.join(sys.path[0],'Energy Components')
+boiler_component = pd.read_csv(os.path.join(components_path,'boilers.csv'))
 UPV_maintenance = float(editable_data['UPV_maintenance']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 7
 UPV_NG = float(editable_data['UPV_NG']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 21 utah
 NG_prices = float(editable_data['price_NG'])/293.001 #Natural gas price at UoU $/kWh

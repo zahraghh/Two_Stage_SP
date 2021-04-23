@@ -7,8 +7,8 @@ import sys
 from pathlib import Path
 editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-components_path = os.path.join(sys.path[0])+'/Energy Components/'
-wind_component = pd.read_csv(components_path+'wind_turbine.csv')
+components_path = os.path.join(sys.path[0],'Energy Components')
+wind_component = pd.read_csv(os.path.join(components_path,'wind_turbine.csv'))
 cut_in_wind_speed = wind_component['Cut-in Speed'][0] #2.5 m/s is the minimum wind speed to run the wind turbines
 lifespan_wind = int(wind_component['Lifespan (year)'][0]) #lifespan of wind turbines
 lifespan_project = float(editable_data['lifespan_project']) #life span of DES
