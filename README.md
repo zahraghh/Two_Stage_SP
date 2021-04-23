@@ -32,7 +32,7 @@ pip install -e /path/to/Two_Stage_SP-JOSS
 
 To use this repository, as an example, you can directly compile the "main_two_stage_SP.py" code in the tests\test1 folder. 
 
-Have a look at the "tests\test1" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
+Have a look at the "tests\test1" folder. Four files are to perfrom two-stage stochastic programming by compiling the "main_two_stage_SP.py" code.
 1. "Energy Components" folder containing energy components characteristics
 2. "editable_values.csv' file containing variable inputs of the package
 3. "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
