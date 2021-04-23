@@ -6,7 +6,7 @@ To use this repository, you need to use either Python or Anaconda. You can downl
 
 Two packages should be installed using the conda or PyPI.
 
-1. install scikit-learn-extra either in the conda environment:
+1. install scikit-learn-extra either in conda environment:
 ```
 conda install -c conda-forge scikit-learn-extra 
 ```
@@ -26,7 +26,7 @@ pip install glpk
 ```
 Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE.
 
-Unzip the "Two_Stage_SP-IMECE" folder and install the required packages using the pip command. The /path/to/Two_Stage_SP-IMECE is the path to the "Two_Stage_SP-IMECE" folder that contains a requirements.txt file. 
+Unzip the "Two_Stage_SP-IMECE" folder and install the required packages using the requirements.txt file that contains all of the required packages. The /path/to/Two_Stage_SP-IMECE is the path to the "Two_Stage_SP-IMECE" folder that contains the requirements.txt file. 
 ```
 pip install -r /path/to/Two_Stage_SP-IMECE/requirements.txt
 ```
