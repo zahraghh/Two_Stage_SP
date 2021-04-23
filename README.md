@@ -2,29 +2,10 @@
 This repository provides a framework to perform multi-objective two-stage stochastic programming on a district energy system. In this framework, we consider uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimize the total cost and operating CO<sub>2</sub> emissions. Natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, batteries, and the grid are the energy components considered in this repository. 
 
 ## How Can I Use this Repository?
-To use this repository, we suggest using a new conda environment. You can download and install anaconda using the following link: https://docs.anaconda.com/anaconda/install/.
+To use this repository, you can download and install anaconda using the following link: https://docs.anaconda.com/anaconda/install/.
 
-After anaconda is installed, search for the anaconda prompt on your system:
-- Windows: Click Start, search, or select Anaconda Prompt from the menu.
-- macOS: Cmd+Space to open Spotlight Search and type “Navigator” to open the program.
-- Linux–CentOS: Open Applications - System Tools - termin
-    
-Create a new environment for this repository, two_stage_env. We have tested this framework using python=3.7.7.
-```
-conda create -n two_stage_env python=3.7.7
-```
 
-Make sure the environment is created. By running the following code, the list of available environments, including two_stage_env, should be shown.
-```
-conda env list
-```
-Activate two_stage_env environment. This command should change the environment from base to two_stage_env.
-```
-conda activate two_stage_env
-```
-Now a new environment, two_stage_env, is ready to test the repository on it. 
-
-Two packages should be installed using the conda command in the two_stage_env environment.
+Two packages should be installed using the conda or PyPI.
 
 1. install scikit-learn-extra in the conda environment:
 ```
@@ -46,7 +27,7 @@ pip install glpk
 ```
 Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE.
 
-Unzip the "Two_Stage_SP-IMECE" folder and locally install the package using the pip command. The /path/to/Two_Stage_SP-IMECE is the path to the "Two_Stage_SP-IMECE" folder that contains a setup.py file. 
+Unzip the "Two_Stage_SP-IMECE" folder and install the required packages using the pip command. The /path/to/Two_Stage_SP-IMECE is the path to the "Two_Stage_SP-IMECE" folder that contains a requirements.txt file. 
 ```
 pip install -r  /path/to/Two_Stage_SP-IMECE/requirements.txt
 ```
