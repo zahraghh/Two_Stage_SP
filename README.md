@@ -2,11 +2,11 @@
 This repository provides a framework to perform multi-objective two-stage stochastic programming on a district energy system. In this framework, we consider uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimize the total cost and operating CO<sub>2</sub> emissions. Natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, batteries, and the grid are the energy components considered in this repository. 
 
 ## How Can I Use this Repository?
-To use this repository, you need to use either Python or Anaconda. You can download and install Python using https://www.python.org/downloads/ or Anaconda using the following  https://docs.anaconda.com/anaconda/install/. 
+To use this repository, you need to use either Python or Anaconda. You can download and install Python using the following link https://www.python.org/downloads/ or Anaconda using the following link https://docs.anaconda.com/anaconda/install/. 
 
 Two packages should be installed using the conda or PyPI.
 
-1. install scikit-learn-extra in the conda environment:
+1. install scikit-learn-extra either in the conda environment:
 ```
 conda install -c conda-forge scikit-learn-extra 
 ```
@@ -15,7 +15,7 @@ or from PiPy:
 pip install scikit-learn-extra
 
 ```
-2. install a solver that is available for public use:
+2. install a solver that is available for public use either in conda environmnet:
 ```
 conda install glpk --channel conda-forge
 ```
