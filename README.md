@@ -28,8 +28,10 @@ Download the ZIP file of this repository from this link: https://github.com/zahr
 
 Unzip the "Two_Stage_SP-IMECE" folder and install the required packages using the pip command. The /path/to/Two_Stage_SP-IMECE is the path to the "Two_Stage_SP-IMECE" folder that contains a requirements.txt file. 
 ```
-pip install -r  /path/to/Two_Stage_SP-IMECE/requirements.txt
+pip install -r /path/to/Two_Stage_SP-IMECE/requirements.txt
 ```
+
+Now, the settings are ready to test this repository. The test folder should be inside 
 
 Have a look at the "Framework Test_University of Utah" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
 1. "Energy Components" folder containing energy components characteristics
