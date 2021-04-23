@@ -6,7 +6,7 @@ import PySAM.ResourceTools as tools
 def download_meta_data(city):
     editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
     editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-    save_path = os.path.join(sys.path[0])+str(city)
+    save_path = os.path.join(sys.path[0],str(city))
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     # replace with key and email address from https://developer.nrel.gov/signup/
@@ -51,9 +51,9 @@ def download_meta_data(city):
         try:
             info = pd.read_csv(url)
             info_name =city+'_'+str(lat)+'_'+str(lon)+'_psm3_60_'+str(year)+'.csv'
-            save_path = os.path.join(sys.path[0])+str(city)
-            info.to_csv(save_path+info_name, index = False)
-            print('Downlaoding meteorlogical data of '+editable_data['city']+' in '+str(year))
+            save_path = os.path.join(sys.path[0],str(city))
+            info.to_csv(os.path.join(save_path,info_name), index = False)
+            print('Downlaoding meteorlogical data of '+city+' in '+str(year))
         except:
             print('ERROR bad request: Data cannnot be downloaded from NSRDB')
             print('Please, check values of 16 ("Longitude") to 23 ("SAM API key") rows in EditableFile.csv file')
