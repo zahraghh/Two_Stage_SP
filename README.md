@@ -2,27 +2,7 @@
 This repository provides a framework to perform multi-objective two-stage stochastic programming on a district energy system. In this framework, we consider uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimize the total cost and operating CO<sub>2</sub> emissions. Natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, batteries, and the grid are the energy components considered in this repository. 
 
 ## How Can I Use this Repository?
-To use this repository, we suggest using a new conda environment. You can download and install anaconda using the following link: https://docs.anaconda.com/anaconda/install/.
-
-After anaconda is installed, search for the anaconda prompt on your system:
-- Windows: Click Start, search, or select Anaconda Prompt from the menu.
-- macOS: Cmd+Space to open Spotlight Search and type “Navigator” to open the program.
-- Linux–CentOS: Open Applications - System Tools - termin
-    
-Create a new environment for this repository, two_stage_env. We have tested this framework using python=3.7.7.
-```
-conda create -n two_stage_env python=3.7.7
-```
-
-Make sure the environment is created. By running the following code, the list of available environments, including two_stage_env, should be shown.
-```
-conda env list
-```
-Activate two_stage_env environment. This command should change the environment from base to two_stage_env.
-```
-conda activate two_stage_env
-```
-Now a new environment, two_stage_env, is ready to test the repository on it. 
+To use this repository, you need to use either Python or Anaconda. You can download and install Python using the following link https://www.python.org/downloads/ or Anaconda using the following link https://docs.anaconda.com/anaconda/install/. 
 
 Two packages should be installed using the conda or PyPI.
 
@@ -33,7 +13,6 @@ conda install -c conda-forge scikit-learn-extra
 or from PyPI:
 ```
 pip install scikit-learn-extra
-
 ```
 2. install a solver that is available for public use either in conda environmnet:
 ```
@@ -44,19 +23,19 @@ or from PyPI:
 pip install glpk
 ```
 
-Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/main.
+Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/JOSS.
 
-Unzip the "Two_Stage_SP-main" folder and locally install the package using the pip command. The /path/to/Two_Stage_SP-main is the path to the "Two_Stage_SP-main" folder that contains a setup.py file. 
+Unzip the "Two_Stage_SP-JOSS" folder and locally install the package using the pip command. The /path/to/Two_Stage_SP-JOSS is the path to the "Two_Stage_SP-JOSS" folder that contains a setup.py file. 
 ```
-pip install -e /path/to/Two_Stage_SP-main
+pip install -e /path/to/Two_Stage_SP-JOSS
 ```
 
-To use this repository, you should directly compile the "main_two_stage_SP.py" code in the "Framework Test_University of Utah" folder.
+To use this repository, you can directly compile the "main_two_stage_SP.py" code in the tests\test1 folder.
 
-Have a look at the "Framework Test_University of Utah" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
-1. "editable_values.csv' file containing variable inputs of the package
-2. "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
-3. "Energy Components" folder containing energy components characteristics
+Have a look at the "tests\test1" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
+1. "Energy Components" folder containing energy components characteristics
+2. "editable_values.csv' file containing variable inputs of the package
+3. "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
 4. "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
 
 ## What Can I change?
@@ -77,7 +56,7 @@ The "editable_values.csv" consists of four main sections:
 1. The first section is "Setting Up the Framework." In this section, the user fills the rows from 5 to 11 by answering a series of yes/no questions. If this is the first time a user compiles this program, the answer to all of the questions is 'yes.' A user can change the values to 'no' if they have already downloaded/generated the files for that row. For example, if the weather data is downloaded and Global Tilted Irradiance (GTI) is calculated on flat plates, a user can change the row 5 value to 'no' to skip that part. 
 
 A figure is shown that demonstrates if values of rows from 5 to 11 are 'yes' in the "editable_values.csv" file, what rows are the input, and what would be the results. This figure can help a user to understand when they already downloaded/calculated results from one of the rows. They can change that row's value to 'no' to reduce the computational time of compiling their case study next time.
-![alt text](https://github.com/zahraghh/Two_Stage_SP/blob/main/Two_stage_framework.png) 
+![alt text](https://github.com/zahraghh/Two_Stage_SP/blob/JOSS/Two_stage_framework.png) 
 
 
 2. The second section is "Weather Data Analysis." In this section, the user fills the rows from 15 to 28. These rows are used to download the data from the National Solar Radiation Database (NSRDB) and using the available solar irradiance in the NSRDB file to calculate the GTI on a flat solar photovoltaic plate. In this section, probability distribution functions (PDF) of uncertain meteorological inputs are calculated for the wind speed and GTI.
