@@ -62,7 +62,7 @@ def best_fit_distribution(data,  ax=None):
       # fit dist to data
       params = distribution.fit(data)
 
-      #warnings.filterwarnings("ignore")
+      warnings.filterwarnings("ignore")
       # Separate parts of parameters
       arg = params[:-2]
       loc = params[-2]
@@ -139,3 +139,4 @@ def probability_distribution(name,column_number,path_test):
         df_object[key] =  pd.DataFrame(data_frame_input,index=[0])
         df_object_all =  df_object_all.append(df_object[key])
     df_object_all.to_csv(os.path.join(folder_path, 'best_fit_'+name+'.csv'))
+probability_distribution('GTI',46,sys.path[0]) #Name and the column number in the weather data
