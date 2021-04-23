@@ -4,8 +4,8 @@ import sys
 import pandas as pd
 import csv
 import math
-def errors(path_test):
-    editable_data_path =os.path.join(path_test, 'editable_values.csv')
+def errors():
+    editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
     editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
     #Do we need to generate the meteorlogical data and their distributions?
     if editable_data['Weather data download and analysis']=='yes':

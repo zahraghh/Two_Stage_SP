@@ -5,15 +5,15 @@ import pandas as pd
 import csv
 import sys
 from pathlib import Path
-def wind_turbine_calc(A_swept_size,hour_of_day,electricity_demand_max,V_wind_now,V_max,path_test):
-    editable_data_path =os.path.join(path_test, 'editable_values.csv')
-    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-    components_path = os.path.join(path_test,'Energy Components')
-    wind_component = pd.read_csv(os.path.join(components_path,'wind_turbine.csv'))
-    cut_in_wind_speed = wind_component['Cut-in Speed'][0] #2.5 m/s is the minimum wind speed to run the wind turbines
-    lifespan_wind = int(wind_component['Lifespan (year)'][0]) #lifespan of wind turbines
-    lifespan_project = float(editable_data['lifespan_project']) #life span of DES
-    UPV_maintenance = float(editable_data['UPV_maintenance']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 7
+editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
+editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
+components_path = os.path.join(sys.path[0],'Energy Components')
+wind_component = pd.read_csv(os.path.join(components_path,'wind_turbine.csv'))
+cut_in_wind_speed = wind_component['Cut-in Speed'][0] #2.5 m/s is the minimum wind speed to run the wind turbines
+lifespan_wind = int(wind_component['Lifespan (year)'][0]) #lifespan of wind turbines
+lifespan_project = float(editable_data['lifespan_project']) #life span of DES
+UPV_maintenance = float(editable_data['UPV_maintenance']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 7
+def wind_turbine_calc(A_swept_size,hour_of_day,electricity_demand_max,V_wind_now,V_max):
     ###Wind Turbine###
     index_wind = list(wind_component['Swept Area m^2']).index(A_swept_size)
     CAP_wind = wind_component['Rated Power kW'][index_wind]

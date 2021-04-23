@@ -53,7 +53,7 @@ def download_meta_data(city):
             info_name =city+'_'+str(lat)+'_'+str(lon)+'_psm3_60_'+str(year)+'.csv'
             save_path = os.path.join(sys.path[0],str(city))
             info.to_csv(os.path.join(save_path,info_name), index = False)
-            print('Downlaoding meteorlogical data of '+city+' in '+str(year))
+            print('Downlaoding meteorlogical data of '+editable_data['city']+' in '+str(year))
         except:
             print('ERROR bad request: Data cannnot be downloaded from NSRDB')
             print('Please, check values of 16 ("Longitude") to 23 ("SAM API key") rows in EditableFile.csv file')

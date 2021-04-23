@@ -5,14 +5,15 @@ import pandas as pd
 import csv
 import sys
 from pathlib import Path
-def solar_pv_calc(A_surf_size,hour_of_day,electricity_demand_max,G_T_now,GT_max, path_test):
-    editable_data_path =os.path.join(path_test, 'editable_values.csv')
-    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-    components_path = os.path.join(path_test,'Energy Components')
-    solar_component = pd.read_csv(os.path.join(components_path,'solar_PV.csv'))
-    lifespan_solar = int(solar_component['Lifespan (year)'][0]) #lifespan of solar PV System
-    lifespan_project = float(editable_data['lifespan_project']) #life span of DES
-    UPV_maintenance = float(editable_data['UPV_maintenance']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 7
+editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
+editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
+components_path = os.path.join(sys.path[0],'Energy Components')
+solar_component = pd.read_csv(os.path.join(components_path,'solar_PV.csv'))
+lifespan_solar = int(solar_component['Lifespan (year)'][0]) #lifespan of solar PV System
+lifespan_project = float(editable_data['lifespan_project']) #life span of DES
+UPV_maintenance = float(editable_data['UPV_maintenance']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 7
+
+def solar_pv_calc(A_surf_size,hour_of_day,electricity_demand_max,G_T_now,GT_max):
     ###Solar PV###
     IC_solar = solar_component['Investment cost ($/Wdc)'][0] #Solar PV capital investment cost is 1.75$/Wdc
     OM_solar = solar_component['Fixed solar PV O&M cost ($/kW-year)'][0] #fixed solar PV O&M cost 18$/kW-year
