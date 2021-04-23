@@ -244,7 +244,7 @@ class TwoStageOpt(Problem):
         return max(electricity_demand_max), max(heating_demand_max),max(GTI_max),max(V_max)
 def results_extraction(problem, algorithm):
     file_name = city+'_Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors'
-    results_path = os.path.join(sys.path[0]) + file_name
+    results_path = os.path.join(sys.path[0], file_name)
     if not os.path.exists(results_path):
         os.makedirs(results_path)
     i = 0
