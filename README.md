@@ -31,9 +31,9 @@ Unzip the "Two_Stage_SP-JOSS" folder and locally install the package using the p
 pip install -e /path/to/Two_Stage_SP-JOSS
 ```
 
-To use this repository, you should directly compile the "main_two_stage_SP.py" code in the "Framework Test_University of Utah" folder.
+To use this repository, you should directly compile the "main_two_stage_SP.py" code in the tests\test1 folder.
 
-Have a look at the "Framework Test_University of Utah" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
+Have a look at the "tests\test1" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
 1. "Energy Components" folder containing energy components characteristics
 2. "editable_values.csv' file containing variable inputs of the package
 3. "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
