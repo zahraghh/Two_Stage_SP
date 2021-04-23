@@ -5,17 +5,16 @@ import pandas as pd
 import csv
 import sys
 from pathlib import Path
-import Two_Stage_SP
-from Two_Stage_SP.solar_PV import solar_pv_calc
-from Two_Stage_SP.wind_turbine import wind_turbine_calc
-editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
-editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-components_path = os.path.join(sys.path[0],'Energy Components')
-battery_component = pd.read_csv(os.path.join(components_path,'battery.csv'))
-UPV_maintenance = float(editable_data['UPV_maintenance']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 7
-lifespan_project = float(editable_data['lifespan_project']) #life span of DES
-deltat = 1 #hour for batteries
-def battery_calc(electricity_demand_bat,hour,E_bat_,_A_solar,_A_swept,_CAP_battery,G_T_now,V_wind_now):
+import solar_PV
+import wind_turbine
+def battery_calc(electricity_demand_bat,hour,E_bat_,_A_solar,_A_swept,_CAP_battery,G_T_now,V_wind_now, path_test):
+    editable_data_path =os.path.join(path_test, 'editable_values.csv')
+    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
+    components_path = os.path.join(path_test,'Energy Components')
+    battery_component = pd.read_csv(os.path.join(components_path,'battery.csv'))
+    UPV_maintenance = float(editable_data['UPV_maintenance']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 7
+    lifespan_project = float(editable_data['lifespan_project']) #life span of DES
+    deltat = 1 #hour for batteries
     A_swept = _A_swept #Swept area of rotor m^2
     A_solar = _A_solar #Solar durface m^2 --> gives 160*A_solar W solar & needs= A_solar/0.7 m^2 rooftop
     CAP_battery= _CAP_battery
@@ -26,7 +25,7 @@ def battery_calc(electricity_demand_bat,hour,E_bat_,_A_solar,_A_swept,_CAP_batte
     bat_dod = battery_component['battery depth of discharge'][index_battery] #battery depth of discharge
     lifespan_battery = battery_component['Lifespan (year)'][index_battery]
     E_bat = E_bat_
-    renewables_elect =  Two_Stage_SP.solar_PV.solar_pv_calc(A_solar, hour,0,G_T_now,1)[0] + Two_Stage_SP.wind_turbine.wind_turbine_calc(A_swept, hour,0,V_wind_now,1)[0]
+    renewables_elect =  solar_PV.solar_pv_calc(A_solar, hour,0,G_T_now,1,path_test)[0] + wind_turbine.wind_turbine_calc(A_swept, hour,0,V_wind_now,1,path_test)[0]
     electricity_demand = electricity_demand_bat
     if renewables_elect>=electricity_demand:
         P_ch_dis_old = renewables_elect - electricity_demand

@@ -6,16 +6,17 @@ import csv
 import sys
 from pathlib import Path
 
-BTUtokWh_convert = 0.000293071 # 1BTU = 0.000293071 kWh
-mmBTutoBTU_convert = 10**6
-editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
-editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-components_path = os.path.join(sys.path[0],'Energy Components')
-boiler_component = pd.read_csv(os.path.join(components_path,'boilers.csv'))
-UPV_maintenance = float(editable_data['UPV_maintenance']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 7
-UPV_NG = float(editable_data['UPV_NG']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 21 utah
-NG_prices = float(editable_data['price_NG'])/293.001 #Natural gas price at UoU $/kWh
-def NG_boiler(F_boilers,_CAP_boiler):
+
+def NG_boiler(F_boilers,_CAP_boiler,path_test):
+    BTUtokWh_convert = 0.000293071 # 1BTU = 0.000293071 kWh
+    mmBTutoBTU_convert = 10**6
+    editable_data_path =os.path.join(path_test, 'editable_values.csv')
+    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
+    components_path = os.path.join(path_test,'Energy Components')
+    boiler_component = pd.read_csv(os.path.join(components_path,'boilers.csv'))
+    UPV_maintenance = float(editable_data['UPV_maintenance']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 7
+    UPV_NG = float(editable_data['UPV_NG']) #https://nvlpubs.nist.gov/nistpubs/ir/2019/NIST.IR.85-3273-34.pdf discount rate =3% page 21 utah
+    NG_prices = float(editable_data['price_NG'])/293.001 #Natural gas price at UoU $/kWh
     CAP_boiler = _CAP_boiler
     index_boiler = list(boiler_component['CAP_boiler (kW)']).index(CAP_boiler)
     CAP_boiler = boiler_component['CAP_boiler (kW)'][index_boiler]

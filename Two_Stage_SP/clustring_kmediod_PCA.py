@@ -18,15 +18,15 @@ from itertools import chain
 from scipy.interpolate import interp1d
 from collections import defaultdict
 from nested_dict import nested_dict
-def kmedoid_clusters():
-    editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
+def kmedoid_clusters(path_test):
+    editable_data_path =os.path.join(path_test, 'editable_values.csv')
     editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
     city = editable_data['city']
-    save_path = os.path.join(sys.path[0],'Scenario Generation', city)
-    representative_days_path = os.path.join(save_path,'Representative days')
+    save_path = os.path.join(path_test, str('Scenario Generation') , city)
+    representative_days_path =  os.path.join(save_path,'Representative days')
     if not os.path.exists(representative_days_path):
         os.makedirs(representative_days_path)
-    folder_path = os.path.join(sys.path[0],str(city))
+    folder_path = os.path.join(path_test,str(city))
     GTI_distribution = pd.read_csv(os.path.join(folder_path,'best_fit_GTI.csv'))
     wind_speed_distribution = pd.read_csv(os.path.join(folder_path,'best_fit_wind_speed.csv'))
     range_data = ['low','medium','high']
@@ -152,7 +152,7 @@ def kmedoid_clusters():
         ax.set_ylabel('Cumulative explained variance',fontsize=BIGGER_SIZE)
         ax.set_xticks(features)
         ax.set_title('The user should set a limit on the explained variance value and then, select the optimum number of PCA features',fontsize=BIGGER_SIZE)
-        plt.savefig(os.path.join(sys.path[0],'Explained variance vs PCA features.png'),dpi=300,facecolor='w')
+        plt.savefig(os.path.join(sys.path[0], 'Explained variance vs PCA features.png'),dpi=300,facecolor='w')
         plt.close()
         print('"Explained variance vs PCA features" figure is saved in the directory folder')
         print('You can use the figure to select the optimum number of features' )
@@ -233,8 +233,8 @@ def kmedoid_clusters():
         data_labels['labels '+str(scenario)]= scores_pca_list[scenario]
     df_clusters= pd.DataFrame(clusters)
     df_labels = pd.DataFrame(data_labels)
-    df_clusters.to_csv(os.path.join(representative_days_path, 'cluster_centers_C_'+str(len(kmedoids.cluster_centers_))+'_L_'+str(len(kmedoids.labels_))+'.csv'), index=False)
-    df_labels.to_csv(os.path.join(representative_days_path, 'labels_C_'+str(len(kmedoids.cluster_centers_))+'_L_'+str(len(kmedoids.labels_))+'.csv'), index=False)
+    df_clusters.to_csv(os.path.join(representative_days_path , 'cluster_centers_C_'+str(len(kmedoids.cluster_centers_))+'_L_'+str(len(kmedoids.labels_))+'.csv'), index=False)
+    df_labels.to_csv(os.path.join(representative_days_path , 'labels_C_'+str(len(kmedoids.cluster_centers_))+'_L_'+str(len(kmedoids.labels_))+'.csv'), index=False)
 
     #Reversing PCA using two methods:
     #Reversing the cluster centers using method 1 (their results are the same)
@@ -319,7 +319,7 @@ def kmedoid_clusters():
             k_heat=0
             list_k_heating = []
             for represent in range(cluster_numbers):
-                representative_day_max[represent] = pd.read_csv(representative_days_path +'\Represent_days_modified_'+str(represent)+'.csv')
+                representative_day_max[represent] = pd.read_csv(os.path.join(representative_days_path ,'Represent_days_modified_'+str(represent)+'.csv'))
                 electricity_demand = representative_day_max[represent]['Electricity total (kWh)'] #kWh
                 heating_demand = representative_day_max[represent]['Heating (kWh)'] #kWh
                 if features_scenarios_nested[scenario][day][0:24][i]>electricity_demand[i]:
@@ -357,7 +357,7 @@ def kmedoid_clusters():
     heating_demand_max = {}
     electricity_demand_max = {}
     for represent in range(cluster_numbers):
-        representative_day_max[represent] = pd.read_csv(representative_days_path +'\Represent_days_modified_'+str(represent)+'.csv')
+        representative_day_max[represent] = pd.read_csv(os.path.join(representative_days_path ,'Represent_days_modified_'+str(represent)+'.csv'))
         electricity_demand = representative_day_max[represent]['Electricity total (kWh)'] #kWh
         heating_demand = representative_day_max[represent]['Heating (kWh)'] #kWh
         #hours_representative_day= round(sum_probability[representative_day]/sum(sum_probability),4)*8760
@@ -392,7 +392,7 @@ def kmedoid_clusters():
     'Labels': filtered_label[cluster_numbers],
     'Percent %': round(sum_probability[representative_day]*100/sum(sum_probability),4)}
     df_represent_days_modified=pd.DataFrame(data_represent_days_modified)
-    df_represent_days_modified.to_csv(representative_days_path+'\Represent_days_modified_'+str(representative_day)+ '.csv', index=False)
+    df_represent_days_modified.to_csv(os.path.join(representative_days_path,'Represent_days_modified_'+str(representative_day)+ '.csv'), index=False)
 
     representative_day = cluster_numbers+1
     data_represent_days_modified={'Electricity total (kWh)': representative_day_max[key_max_heating]['Electricity total (kWh)'],
@@ -403,7 +403,7 @@ def kmedoid_clusters():
     'Labels': filtered_label[cluster_numbers+1],
     'Percent %': round(sum_probability[representative_day]*100/sum(sum_probability),4)}
     df_represent_days_modified=pd.DataFrame(data_represent_days_modified)
-    df_represent_days_modified.to_csv(representative_days_path+'\Represent_days_modified_'+str(representative_day)+ '.csv', index=False)
+    df_represent_days_modified.to_csv(os.path.join(representative_days_path,'Represent_days_modified_'+str(representative_day)+ '.csv'), index=False)
 
     for representative_day in range(len(Scenario_generated_new)):
         represent_gaps = {}
@@ -437,5 +437,5 @@ def kmedoid_clusters():
         'Percent %': round(sum_probability[representative_day]*100/sum(sum_probability),4)}
         #print(np.mean(Scenario_generated_new[representative_day][0:24]))
         df_represent_days_modified=pd.DataFrame(data_represent_days_modified)
-        df_represent_days_modified.to_csv(representative_days_path+'\Represent_days_modified_'+str(representative_day)+ '.csv', index=False)
+        df_represent_days_modified.to_csv(os.path.join(representative_days_path,'Represent_days_modified_'+str(representative_day)+ '.csv'), index=False)
 #kmedoid_clusters()

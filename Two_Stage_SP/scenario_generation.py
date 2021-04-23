@@ -5,17 +5,17 @@ from collections import defaultdict
 from scipy import stats
 import os
 import sys
-import Two_Stage_SP
-from Two_Stage_SP.EGEF import EF,printinfo,fit_and_plot,EGEF_state,best_fit_distribution
-editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
-editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-city = editable_data['city']
-folder_path = os.path.join(sys.path[0],str(city))
-save_path = os.path.join(sys.path[0], 'Scenario Generation',city)
-if not os.path.exists(save_path):
-    os.makedirs(save_path)
+import EGEF
+
 lbstokg_convert = 0.453592 #1 lb = 0.453592 kg
-def scenario_generation_results(state=None):
+def scenario_generation_results(path_test,state=None):
+    editable_data_path =os.path.join(path_test, 'editable_values.csv')
+    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
+    city = editable_data['city']
+    folder_path = os.path.join(sys.path[0],str(city))
+    save_path = os.path.join(sys.path[0],'Scenario Generation',city)
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
     #Normal distribution for electricity emissions
     city_EF = int(editable_data['city EF'])
     lat = float(editable_data['Latitude'])
@@ -42,7 +42,7 @@ def scenario_generation_results(state=None):
         EGEF_data[0]='norm'
         scale = 0.1*loc
     else:
-        EGEF_data = Two_Stage_SP.EGEF.best_fit_distribution(Two_Stage_SP.EGEF.EGEF_state(state))
+        EGEF_data = EGEF.best_fit_distribution(EGEF.EGEF_state(state))
         scale = EGEF_data[1][1]*lbstokg_convert/1000
     if EGEF_data[0] == 'norm':
         electricity_emissions_scenario['low'] = 8760*[-1.732051*scale+loc]
@@ -140,4 +140,4 @@ def scenario_generation_results(state=None):
                             'Electricity Emission Factor': electricity_emissions_scenario[i_emission]
                             }
                     df_scenario_generated=pd.DataFrame(scenario_genrated['D:'+i_demand+'/S:'+i_solar+'/W:'+i_wind+'/C:'+i_emission])
-                    df_scenario_generated.to_csv(os.path.join(save_path , 'D_'+i_demand+'_S_'+i_solar+'_W_'+i_wind+'_C_'+i_emission+'.csv'), index=False)
+                    df_scenario_generated.to_csv(os.path.join(save_path,'D_'+i_demand+'_S_'+i_solar+'_W_'+i_wind+'_C_'+i_emission+'.csv'), index=False)
