@@ -21,7 +21,7 @@ if __name__ == "__main__":
         GTI.GTI_results(city_DES)
         #Calculating the distribution of variable inputs: solar irradiance and wind speed
         print('Calculating the distribution of global tilted irradiance (might take ~5 mins)')
-        uncertainty_analysis .probability_distribution('GTI',46) #Name and the column number in the weather data
+        uncertainty_analysis.probability_distribution('GTI',46) #Name and the column number in the weather data
         print('Calculating the distribution of wind speed (might take ~5 mins)')
         uncertainty_analysis.probability_distribution('wind_speed',8) #Name and the column number in the weather data
     #Do we need to generate scenarios for uncertainties in ...
