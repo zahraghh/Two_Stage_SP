@@ -21,7 +21,6 @@ conda install glpk --channel conda-forge
 or from PyPI:
 ```
 pip install glpk
-
 ```
 Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/IMECE.
 
