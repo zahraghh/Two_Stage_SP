@@ -28,8 +28,10 @@ Two packages should be installed using the conda command in the two_stage_env en
 
 1. install scikit-learn-extra in the conda environment:
 ```
-conda install -c conda-forge scikit-learn-extra or
-
+conda install -c conda-forge scikit-learn-extra 
+```
+or from PiPy:
+```
 pip install scikit-learn-extra
 
 ```
