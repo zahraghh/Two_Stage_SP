@@ -54,7 +54,9 @@ The first and primary input is the "editable_values.csv" file. This CSV file con
 4. The fourth column is "Where it's used," which gives the subsection of each value. This column can show the rows that are related to each other. 
 
 The "editable_values.csv" consists of four main sections: 
-1. The first section is "Setting Up the Framework." In this section, the user fills the rows from 5 to 11 by answering a series of yes/no questions. If this is the first time a user compiles this program, the answer to all of the questions is 'yes.' A user can change the values to 'no' if they have already downloaded/generated the files for that row. For example, if the weather data is downloaded and Global Tilted Irradiance (GTI) is calculated on flat plates, a user can change the row 5 value to 'no' to skip that part. A figue is shown that demonstrate if values of rows from 5 to 11 are 'yes' in the "editable_values.csv" file, what row are the input and what would be results. This figure can help a user to understand when they already downloaded/calculated results from one of teh rows, they can change that to 'no' to reduce the computational time of compiling their case study.
+1. The first section is "Setting Up the Framework." In this section, the user fills the rows from 5 to 11 by answering a series of yes/no questions. If this is the first time a user compiles this program, the answer to all of the questions is 'yes.' A user can change the values to 'no' if they have already downloaded/generated the files for that row. For example, if the weather data is downloaded and Global Tilted Irradiance (GTI) is calculated on flat plates, a user can change the row 5 value to 'no' to skip that part. 
+
+A figue is shown that demonstrate if values of rows from 5 to 11 are 'yes' in the "editable_values.csv" file, what row are the input and what would be results. This figure can help a user to understand when they already downloaded/calculated results from one of teh rows, they can change that to 'no' to reduce the computational time of compiling their case study.
 ![alt text](https://github.com/zahraghh/Two_Stage_SP/blob/IMECE/Two_stage_framework.png) 
 
 
