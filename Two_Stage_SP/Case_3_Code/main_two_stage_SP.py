@@ -9,7 +9,7 @@ from platypus import NSGAII, Problem, Real, Integer, InjectedPopulation,GAOperat
 # https://platypus.readthedocs.io/en/latest/getting-started.html
 editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
 editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
-path_test =  os.path.join(sys.path[0],'Two_Stage_SP')
+path_test =  os.path.join(sys.path[0])
 from pyomo.opt import SolverFactory
 path_parent= Path(Path(sys.path[0]))
 Two_stage_SP_folder = os.path.join(path_parent.parent.absolute())
