@@ -33,7 +33,7 @@ Two_stage_SP package optimizes the sizing of energy components for a district en
 
 This framework has four main sections. In the first section, actual weather data from National Solar Radiation Database (NSRDB) is downloaded. Global tilted irradiance is quantified per unit of a tilted flat plate, representing solar photovoltaic arrays. In the second section, uncertainties in energy demands, solar irradiance, wind speed, and electricity emissions are considered by generating new scenarios with different values of energy demands, solar irradiance, wind speed, and electricity emissions. In the third section, the k-medoid clustering algorithm is used to reduce the number of scenarios to a selected number defined by the user by removing similar scenarios. In the fourth section, the two-stage stochastic programming is performed by utilizing the nondominated sorting genetic algorithm II (NSGA-II) algorithm in the first stage and the public GNU Linear Programming Kit (GLPK) solver in the second stage. The objectives are to minimize the total cost (investment, operation & maintenance, and operating cost) and operating CO<sub>2</sub> emissions.
 
-A user can change the case study's location, modify the energy components' characteristics and energy configuration. what else they can change?
+A user can change the case study's location, modify the energy components' characteristics, change the energy configuration, and/or change the district energy system's charectrsitics. 
 
 # Statement of need
 research problem: in the vast 
