@@ -36,7 +36,7 @@ Cluster numbers,9,Optimum number of clusters. This number +2 gives the number of
 #############            District Energy System Optimization                 ################,,,
 #########################################################################,,,
 city EF,1593,"city's electricity generation emission factor  (lbs/MWh). For U.S. case studies, you can find the electricity generation emission factors at state level here: https://www.eia.gov/electricity/state/'",District energy system's charecteristics
-renewable percentage,0,"What percentage of city's electricity emission factor should be used? For example,  0.7  value means electricity generation emission factor = city EF * 0.7",District energy system's charecteristics
+renewable percentage,1,"What percentage of city's electricity emission factor should be used? For example,  0.7  value means electricity generation emission factor = city EF * 0.7",District energy system's charecteristics
 price_NG,4.99,Constant price of natural gas ($/cubic-ft),District energy system's charecteristics
 electricity_price,6.8,Constant price of electricity (cent/kWh),District energy system's charecteristics
 lifespan_project,20,Lifespan of the disrict energy system (years),District energy system's charecteristics
