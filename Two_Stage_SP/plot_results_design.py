@@ -53,13 +53,15 @@ def parallel_plots(type_plot):
     label_data['Swept (sq-m)'] = label_data['Swept Area (m^2)']
     label_data['Emissions (kg)'] = label_data['Emission (kg CO2)']
     label_data['Battery (kW)'] = label_data['Battery Capacity (kW)']
+    label_data['CHP (kW)'] = label_data['CHP Electricty Capacity (kW)']
+    label_data['Boilers (kW)'] = label_data['Boilers Capacity (kW)']
 
     if type_plot == 'cost':
         #cols = ['Solar Area (sq-m)', 'Swept Area (sq-m)', 'Boilers Capacity (kW)', 'CHP Electricty Capacity (kW)', 'Battery Capacity (kW)','Emission (kg CO2)','Cost ($)']
-        cols = ['Solar (sq-m)', 'Swept (sq-m)', 'Battery (kW)','Emissions (kg)','Cost ($)']
+        cols = ['CHP (kW)','Boilers (kW)','Solar (sq-m)', 'Swept (sq-m)', 'Battery (kW)','Emissions (kg)','Cost ($)']
         color_plot = px.colors.sequential.Blues
     if type_plot == 'emissions':
-        cols = ['Solar (sq-m)', 'Swept (sq-m)', 'Battery (kW)','Cost ($)','Emissions (kg)']
+        cols = ['CHP (kW)','Boilers (kW)','Solar (sq-m)', 'Swept (sq-m)', 'Battery (kW)','Cost ($)','Emissions (kg)']
         color_plot = px.colors.sequential.Reds
     fig_new = px.parallel_coordinates(label_data, color=cols[-1], dimensions=cols,
                                   color_continuous_scale=color_plot)
@@ -68,4 +70,4 @@ def parallel_plots(type_plot):
             size=18,
         )
     )
-    fig_new.write_image(os.path.join(results_path,'Parallel_coordinates_'+type_plot+'.png'),width=680, height=450,scale=3)
+    fig_new.write_image(os.path.join(results_path,'Parallel_coordinates_'+type_plot+'.png'),width=980, height=450,scale=3)
