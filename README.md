@@ -1,7 +1,7 @@
 # Two-Stage Stochastic Programming
 This repository provides a framework to perform multi-objective two-stage stochastic programming on a district energy system. In this framework, we consider uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimize the total cost and operating CO<sub>2</sub> emissions. Natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, batteries, and the grid are the energy components considered in this repository. 
 
-## How Can I Use this Repository?
+## How Can I Install this Repository?
 To use this repository, you need to use either Python or Anaconda. You can download and install Python using the following link https://www.python.org/downloads/ or Anaconda using the following link https://docs.anaconda.com/anaconda/install/. 
 
 Two packages should be installed using the conda or PyPI.
@@ -30,13 +30,122 @@ Unzip the "Two_Stage_SP-JOSS" folder and locally install the package using the p
 pip install -e /path/to/Two_Stage_SP-JOSS
 ```
 
-To use this repository, as an example, you can directly compile the "main_two_stage_SP.py" code in the tests\test1 folder. 
+To use this repository, you can directly compile the "main_two_stage_SP.py" code in the tests\test1 folder.
 
-Have a look at the "tests\test1" folder. Four files are to perfrom two-stage stochastic programming by compiling the "main_two_stage_SP.py" code.
+Have a look at the "tests\test1" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
 1. "Energy Components" folder containing energy components characteristics
-2. "editable_values.csv' file containing variable inputs of the package
+2. "editable_values.csv" file containing variable inputs of the package
 3. "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
 4. "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
+
+## How to Use this Repository?
+After the package is installed, we can use Two_Stage_SP-JOSS\tests\Test folder that contains the necessary help files ("Energy Components" folder, "editable_values.csv', "total_energy_demands.csv") to have our main.py code in it. We can first download the weather files, calculate the global titlted irradiance, and quantify distributions of solar irradiance and wind speed by writing a similar code in main.py: 
+```
+import os
+import sys
+import pandas as pd
+import csv
+from Two_Stage_SP import download_windsolar_data, GTI,uncertainty_analysis
+if __name__ == "__main__":
+    #Reading the data from the Weather Data Analysis section of the editable_values.csv
+    editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
+    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
+    city_DES =str(editable_data['city'])
+    #Downloading the weather data from NSRDB
+    download_windsolar_data.download_meta_data(city_DES)
+    #Calculating the  global tilted irradiance on a surface in the City
+    GTI.GTI_results(city_DES)
+    #Calculating the distribution of global tilted irradiance (might take ~5 mins)
+    uncertainty_analysis.probability_distribution('GTI',46) #Name and the column number in the weather data
+    #Calculating the distribution of wind speed (might take ~5 mins)
+    uncertainty_analysis.probability_distribution('wind_speed',8) #Name and the column number in the weather data
+```
+The outcome of this code is a new folder with the name of the city in  the editable_values.csv. If you haven't change the editable_values.csv, the folder name is Salt Lake City, which contains the needed weather parameters. 
+
+After the weather data is generated, we can perfrom scenario generation using Monte Carlo simulation and scenario reduction using k-median algorithm to reduce the number of scenarios:
+```
+import os
+import sys
+import pandas as pd
+import csv
+from Two_Stage_SP import scenario_generation,clustring_kmediod_PCA
+if __name__ == "__main__":
+    #Reading the data from the  Scenario Generation/Reduction section of the editable_values.csv
+    #We need "total_energy_demands.csv" for scenario generation/reduction
+    editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
+    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
+    #Generate scenarios for uncertainties in ...
+    #energy demands,solar irradiance, wind speed, and electricity emissions
+    state = editable_data['State']
+    scenario_generation.scenario_generation_results(state)
+    #Reduce the number scenarios of scenarios ...
+    #using the PCA and k-medoid algorithm
+    clustring_kmediod_PCA.kmedoid_clusters()
+```
+After scenarios are generated and reduced, the selected of representative days are located in Scenario Generation\City\Representative days folder. Then, we perfrom the optimization on these selected representative days:
+```
+import os
+import sys
+import pandas as pd
+import csv
+from platypus import NSGAII, Problem, Real, Integer, InjectedPopulation,GAOperator,HUX, BitFlip, SBX,PM,PCX,nondominated,ProcessPoolEvaluator
+from pyomo.opt import SolverFactory
+from Two_Stage_SP import NSGA2_design_parallel_discrete
+if __name__ == "__main__":
+    #Reading the data from the  District Energy System Optimization section of the editable_values.csv
+    # We need total_energy_demands.csv and a folder with charectristic of energy components
+    editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
+    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
+    #Perfrom two-stage stochastic optimization
+    problem= NSGA2_design_parallel_discrete.TwoStageOpt()
+    #Make the optimization parallel
+    with ProcessPoolEvaluator(int(editable_data['num_processors'])) as evaluator: #max number of accepted processors is 61 by program/ I have 8 processor on my PC
+        algorithm = NSGAII(problem,population_size=int(editable_data['population_size']) ,evaluator=evaluator,variator=GAOperator(HUX(), BitFlip()))
+        algorithm.run(int(editable_data['num_iterations']))
+    #Generate a csv file as the result
+    NSGA2_design_parallel_discrete.results_extraction(problem, algorithm)
+```
+After the optimization is performed (migh take a few hours based on the number of iterations), a new folder (City_Discrete_EF_EF value_...)  is generated that contains the two csv files, sizing of energy components and objective values for the Pareto front. 
+
+We can also perfrom the three parts together:
+```
+import os
+import sys
+import pandas as pd
+import csv
+from platypus import NSGAII, Problem, Real, Integer, InjectedPopulation,GAOperator,HUX, BitFlip, SBX,PM,PCX,nondominated,ProcessPoolEvaluator
+from pyomo.opt import SolverFactory
+from Two_Stage_SP import NSGA2_design_parallel_discrete, scenario_generation,clustring_kmediod_PCA, download_windsolar_data, GTI,uncertainty_analysis
+if __name__ == "__main__":
+    #Reading the data from the Weather Data Analysis section of the editable_values.csv
+    editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
+    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
+    city_DES =str(editable_data['city'])
+    #Downloading the weather data from NSRDB
+    download_windsolar_data.download_meta_data(city_DES)
+    #Calculating the  global tilted irradiance on a surface in the City
+    GTI.GTI_results(city_DES)
+    #Calculating the distribution of global tilted irradiance (might take ~5 mins)
+    uncertainty_analysis.probability_distribution('GTI',46) #Name and the column number in the weather data
+    #Calculating the distribution of wind speed (might take ~5 mins)')
+    uncertainty_analysis.probability_distribution('wind_speed',8) #Name and the column number in the weather data
+    #Generate scenarios for uncertainties in ...
+    #energy demands,solar irradiance, wind speed, and electricity emissions
+    state = editable_data['State']
+    scenario_generation.scenario_generation_results(state)
+    #Reduce the number scenarios of scenarios ...
+    #using the PCA and k-medoid algorithm
+    clustring_kmediod_PCA.kmedoid_clusters()
+    #Perfrom two-stage stochastic optimization
+    problem= NSGA2_design_parallel_discrete.TwoStageOpt()
+    #Make the optimization parallel
+    with ProcessPoolEvaluator(int(editable_data['num_processors'])) as evaluator: #max number of accepted processors is 61 by program/ I have 8 processor on my PC
+        algorithm = NSGAII(problem,population_size=int(editable_data['population_size']) ,evaluator=evaluator,variator=GAOperator(HUX(), BitFlip()))
+        algorithm.run(int(editable_data['num_iterations']))
+    #Generate a csv file as the result
+    NSGA2_design_parallel_discrete.results_extraction(problem, algorithm)
+
+```
 
 ## What Can I change?
 Three sets of input data are present that a user can change to test a new/modified case study.
