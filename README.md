@@ -38,7 +38,7 @@ Have a look at the "tests\test1" folder. Four files are needed to compile the "m
 3. "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
 4. "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
 
-## How to Start Coding Using this Repository?
+## How to Use this Repository?
 After the package is installed, we can use Two_Stage_SP-JOSS\tests\Test folder that contains the necessary help files ("Energy Components" folder, "editable_values.csv', "total_energy_demands.csv") to have our main.py code in it. We can first download the weather files, calculate the global titlted irradiance, and quantify distributions of solar irradiance and wind speed by writing a similar code in main.py: 
 ```
 import os
