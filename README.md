@@ -39,7 +39,7 @@ Have a look at the "tests\test1" folder. Four files are needed to compile the "m
 4. "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
 
 ## How to Start Coding Using this Repository?
-After the package is installed, we can use Two_Stage_SP-JOSS\tests\Test folder that contains the necessary help files ("Energy Components" folder, "editable_values.csv', "total_energy_demands.csv") to have our main.py code in it. We can first download the weather files and calculate the global titlted irradiance by writing a similar code in main.py: 
+After the package is installed, we can use Two_Stage_SP-JOSS\tests\Test folder that contains the necessary help files ("Energy Components" folder, "editable_values.csv', "total_energy_demands.csv") to have our main.py code in it. We can first download the weather files, calculate the global titlted irradiance, and quantify distributions of solar irradiance and wind speed by writing a similar code in main.py: 
 ```
 import os
 import sys
@@ -60,6 +60,29 @@ if __name__ == "__main__":
     #Calculating the distribution of wind speed (might take ~5 mins)')
     uncertainty_analysis.probability_distribution('wind_speed',8) #Name and the column number in the weather data
 ```
+The outcome of this code is a new folder with the name of the city in  the editable_values.csv. If you haven't change the editable_values.csv, the folder name is Salt Lake City, which contains the needed weather parameters. 
+
+After the weather data is generated, we can perfrom scenario generation using Monte Carlo simulation and scenario reduction using k-median algorithm to reduce the number of scenarios:
+```
+import os
+import sys
+import pandas as pd
+import csv
+from Two_Stage_SP import scenario_generation,clustring_kmediod_PCA
+if __name__ == "__main__":
+    #Reading the data from the  Scenario Generation/Reduction section of the editable_values.csv
+    #We need "total_energy_demands.csv" for scenario generation/reduction
+    editable_data_path =os.path.join(sys.path[0], 'editable_values.csv')
+    editable_data = pd.read_csv(editable_data_path, header=None, index_col=0, squeeze=True).to_dict()[1]
+    #Generate scenarios for uncertainties in ...
+    #energy demands,solar irradiance, wind speed, and electricity emissions
+    state = editable_data['State']
+    scenario_generation.scenario_generation_results(state)
+    #Reduce the number scenarios of scenarios ...
+    #using the PCA and k-medoid algorithm
+    clustring_kmediod_PCA.kmedoid_clusters()
+```
+
 ## What Can I change?
 Three sets of input data are present that a user can change to test a new/modified case study.
 
