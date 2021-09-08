@@ -1,7 +1,7 @@
 # Two-Stage Stochastic Programming
 This repository provides a framework to perform multi-objective two-stage stochastic programming on a district energy system. In this framework, we consider uncertainties in energy demands, solar irradiance, wind speed, and electricity emission factors. This framework optimizes the sizing of energy components to minimize the total cost and operating CO<sub>2</sub> emissions. Natural gas boilers, combined heating and power (CHP), solar photovoltaic (PV), wind turbines, batteries, and the grid are the energy components considered in this repository. 
 
-## How Can I Use this Repository?
+## How Can I Install this Repository?
 To use this repository, you need to use either Python or Anaconda. You can download and install Python using the following link https://www.python.org/downloads/ or Anaconda using the following link https://docs.anaconda.com/anaconda/install/. 
 
 Two packages should be installed using the conda or PyPI.
@@ -34,9 +34,12 @@ To use this repository, you can directly compile the "main_two_stage_SP.py" code
 
 Have a look at the "tests\test1" folder. Four files are needed to compile the "main_two_stage_SP.py" code successfully:
 1. "Energy Components" folder containing energy components characteristics
-2. "editable_values.csv' file containing variable inputs of the package
+2. "editable_values.csv" file containing variable inputs of the package
 3. "total_energy_demands.csv" file containing the aggregated hourly electricity, heating, and cooling demands of a group of buildings
 4. "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
+
+## How to Start Coding Using this Repository?
+After the package is installed, we can use Two_Stage_SP-JOSS\tests\Test folder that contains the necessary help files ("Energy Components" folder, "editable_values.csv', "total_energy_demands.csv") to have our main.py code in it. We can first download the weather files and calculate the global titlted irradiance by writing a similar code in main.py: 
 
 ## What Can I change?
 Three sets of input data are present that a user can change to test a new/modified case study.
