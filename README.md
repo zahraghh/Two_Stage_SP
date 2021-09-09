@@ -105,7 +105,7 @@ if __name__ == "__main__":
     #Generate a csv file as the result
     NSGA2_design_parallel_discrete.results_extraction(problem, algorithm)
 ```
-After the optimization is performed (migh take a few hours based on the number of iterations), a new folder (City_Discrete_EF_EF value_...)  is generated that contains the two csv files, sizing of energy components and objective values for the Pareto front. 
+After the optimization is performed (migh take a few hours based on the number of iterations), a new folder (City_name_Discrete_EF_...)  is generated that contains the two csv files, sizing of energy components and objective values for the Pareto front. 
 
 We can also perfrom the three parts together:
 ```
