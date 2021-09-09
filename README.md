@@ -82,7 +82,7 @@ if __name__ == "__main__":
     #using the PCA and k-medoid algorithm
     clustring_kmediod_PCA.kmedoid_clusters()
 ```
-After scenarios are generated and reduced, the selected of representative days are located in Scenario Generation\City\Representative days folder. Then, we perfrom the optimization on these selected representative days:
+After scenarios are generated and reduced, the selected representative days are located in Scenario Generation\City\Representative days folder. Then, we perfrom the optimization on these selected representative days:
 ```
 import os
 import sys
