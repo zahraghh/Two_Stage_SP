@@ -107,7 +107,7 @@ if __name__ == "__main__":
 ```
 After the optimization is performed (migh take a few hours based on the number of iterations), a new folder (City_name_Discrete_EF_...)  is generated that contains the two csv files, sizing of energy components and objective values for the Pareto front. 
 
-We can also perfrom the three parts together:
+We can also perfrom the three parts together and geterate the plots using the following code:
 ```
 ### Performing Two Stage Stochastic Programming for the Design of District Energy system ###
 import os
