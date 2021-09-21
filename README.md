@@ -23,11 +23,11 @@ or from PyPI:
 pip install glpk
 ```
 
-Download the ZIP file of this repository from this link: https://github.com/zahraghh/Two_Stage_SP/tree/JOSS.
+Download the ZIP file of this repository from this link: https://github.com/zahraghh/multi_objective_optimization
 
-Unzip the "Two_Stage_SP-JOSS" folder and locally install the package using the pip command. The /path/to/Two_Stage_SP-JOSS is the path to the "Two_Stage_SP-JOSS" folder that contains a setup.py file. 
+Unzip the "multi_objective_optimization" folder and locally install the package using the pip command. The /path/to/multi_objective_optimization is the path to the "multi_objective_optimization" folder that contains a setup.py file. 
 ```
-pip install -e /path/to/Two_Stage_SP-JOSS
+pip install -e /path/to/multi_objective_optimization
 ```
 
 To use this repository, you can directly compile the "main_two_stage_SP.py" code in the tests\test1 folder.
