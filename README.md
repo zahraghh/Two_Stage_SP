@@ -39,7 +39,10 @@ Have a look at the "tests\test1" folder. Four files are needed to compile the "m
 4. "main_two_stage_SP.py" file to be compiled and run the two-stage stochastic programming optimization
 
 ## How to Use this Repository?
-After the package is installed, we can use Two_Stage_SP-JOSS\tests\Test folder that contains the necessary help files ("Energy Components" folder, "editable_values.csv', "total_energy_demands.csv") to have our main.py code in it. We can first download the weather files, calculate the global titlted irradiance, and quantify distributions of solar irradiance and wind speed by writing a similar code in main.py: 
+After the package is installed, we can use Two_Stage_SP-JOSS\tests\Test folder that contains the necessary help files ("Energy Components" folder, "editable_values.csv', "total_energy_demands.csv") to have our main.py code in it. 
+
+### Part 1: Download the Weather Files 
+We can first download the weather files, calculate the global titlted irradiance, and quantify distributions of solar irradiance and wind speed by writing a similar code in main.py: 
 ```
 import os
 import sys
@@ -62,6 +65,7 @@ if __name__ == "__main__":
 ```
 The outcome of this code is a new folder with the name of the city in  the editable_values.csv. If you haven't change the editable_values.csv, the folder name is Salt Lake City, which contains the needed weather parameters. 
 
+### Part 2: Scenario Generation and Reduction
 After the weather data is generated, we can perfrom scenario generation using Monte Carlo simulation and scenario reduction using k-median algorithm to reduce the number of scenarios:
 ```
 import os
@@ -82,7 +86,10 @@ if __name__ == "__main__":
     #using the PCA and k-medoid algorithm
     clustring_kmediod_PCA.kmedoid_clusters()
 ```
-After scenarios are generated and reduced, the selected representative days are located in Scenario Generation\City\Representative days folder. Then, we perfrom the optimization on these selected representative days:
+After scenarios are generated and reduced, the selected representative days are located in Scenario Generation\City\Representative days folder. 
+
+### Part 3: Two-stage stochastic Optimization
+Then, we perfrom the optimization on these selected representative days:
 ```
 import os
 import sys
@@ -107,6 +114,7 @@ if __name__ == "__main__":
 ```
 After the optimization is performed (migh take a few hours based on the number of iterations), a new folder (City_name_Discrete_EF_...)  is generated that contains the two csv files, sizing of energy components and objective values for the Pareto front. 
 
+### All Parts Together
 We can also perfrom the three parts together and geterate the plots using the following code:
 ```
 ### Performing Two Stage Stochastic Programming for the Design of District Energy system ###
@@ -166,8 +174,6 @@ if __name__ == "__main__":
         Two_Stage_SP.plot_results_design.parallel_plots('emissions')
         file_name = editable_data['city']+'_Discrete_EF_'+str(float(editable_data['renewable percentage']) )+'_design_'+str(editable_data['num_iterations'])+'_'+str(editable_data['population_size'])+'_'+str(editable_data['num_processors'])+'_processors'
         print('Plots are generated in the '+ file_name+' folder')
-
-
 ```
 
 ## What Can I change?
