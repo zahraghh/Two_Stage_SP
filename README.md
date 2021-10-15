@@ -22,7 +22,7 @@ or from PyPI:
 ```
 pip install glpk
 ```
-3. Install 
+3. Install orca to generate parallel coordinate plots:
 ```
 conda install -c plotly plotly-orca
 ```
