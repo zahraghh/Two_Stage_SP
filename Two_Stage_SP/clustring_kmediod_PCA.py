@@ -319,7 +319,7 @@ def kmedoid_clusters():
             k_heat=0
             list_k_heating = []
             for represent in range(cluster_numbers):
-                representative_day_max[represent] = pd.read_csv(representative_days_path +'\Represent_days_modified_'+str(represent)+'.csv')
+                representative_day_max[represent] = pd.read_csv(os.path.join(representative_days_path,'Represent_days_modified_'+str(representative_day)+ '.csv'))
                 electricity_demand = representative_day_max[represent]['Electricity total (kWh)'] #kWh
                 heating_demand = representative_day_max[represent]['Heating (kWh)'] #kWh
                 if features_scenarios_nested[scenario][day][0:24][i]>electricity_demand[i]:
@@ -357,7 +357,7 @@ def kmedoid_clusters():
     heating_demand_max = {}
     electricity_demand_max = {}
     for represent in range(cluster_numbers):
-        representative_day_max[represent] = pd.read_csv(representative_days_path +'\Represent_days_modified_'+str(represent)+'.csv')
+        representative_day_max[represent] = pd.read_csv(os.path.join(representative_days_path,'Represent_days_modified_'+str(representative_day)+ '.csv'))
         electricity_demand = representative_day_max[represent]['Electricity total (kWh)'] #kWh
         heating_demand = representative_day_max[represent]['Heating (kWh)'] #kWh
         #hours_representative_day= round(sum_probability[representative_day]/sum(sum_probability),4)*8760
@@ -392,7 +392,7 @@ def kmedoid_clusters():
     'Labels': filtered_label[cluster_numbers],
     'Percent %': round(sum_probability[representative_day]*100/sum(sum_probability),4)}
     df_represent_days_modified=pd.DataFrame(data_represent_days_modified)
-    df_represent_days_modified.to_csv(representative_days_path+'\Represent_days_modified_'+str(representative_day)+ '.csv', index=False)
+    df_represent_days_modified.to_csv(os.path.join(representative_days_path,'Represent_days_modified_'+str(representative_day)+ '.csv'), index=False)
 
     representative_day = cluster_numbers+1
     data_represent_days_modified={'Electricity total (kWh)': representative_day_max[key_max_heating]['Electricity total (kWh)'],
@@ -403,7 +403,7 @@ def kmedoid_clusters():
     'Labels': filtered_label[cluster_numbers+1],
     'Percent %': round(sum_probability[representative_day]*100/sum(sum_probability),4)}
     df_represent_days_modified=pd.DataFrame(data_represent_days_modified)
-    df_represent_days_modified.to_csv(representative_days_path+'\Represent_days_modified_'+str(representative_day)+ '.csv', index=False)
+    df_represent_days_modified.to_csv(os.path.join(representative_days_path,'Represent_days_modified_'+str(representative_day)+ '.csv'), index=False)
 
     for representative_day in range(len(Scenario_generated_new)):
         represent_gaps = {}
@@ -437,5 +437,5 @@ def kmedoid_clusters():
         'Percent %': round(sum_probability[representative_day]*100/sum(sum_probability),4)}
         #print(np.mean(Scenario_generated_new[representative_day][0:24]))
         df_represent_days_modified=pd.DataFrame(data_represent_days_modified)
-        df_represent_days_modified.to_csv(representative_days_path+'\Represent_days_modified_'+str(representative_day)+ '.csv', index=False)
+        df_represent_days_modified.to_csv(os.path.join(representative_days_path,'Represent_days_modified_'+str(representative_day)+ '.csv'), index=False)
 #kmedoid_clusters()
