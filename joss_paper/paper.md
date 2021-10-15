@@ -36,7 +36,7 @@ This framework has four main sections. In the first section, actual weather data
 A user can change the case study's location, modify the energy components' characteristics, change the energy configuration, and/or change the district energy system's charectrsitics. 
 
 # Statement of need
-research problem: in the vast 
+research problem: in the vast [@klemm2021modeling] and [@pfenninger2017importance]
 
 real world problem: helping facility managers
 
