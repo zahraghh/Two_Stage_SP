@@ -22,7 +22,10 @@ or from PyPI:
 ```
 pip install glpk
 ```
-
+3. Install 
+```
+conda install -c plotly plotly-orca
+```
 Download the ZIP file of this repository from this link: https://github.com/zahraghh/multi_objective_optimization
 
 Unzip the "multi_objective_optimization" folder and locally install the package using the pip command. The /path/to/multi_objective_optimization is the path to the "multi_objective_optimization" folder that contains a setup.py file. 
