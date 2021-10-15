@@ -36,7 +36,7 @@ This framework has four main sections. In the first section, actual weather data
 A user can change the case study's location, edit energy demands of buildings, modify the energy components' characteristics, change the energy configuration, and/or change the district energy system's charectrsitics. 
 
 # Statement of need
-Optimizating sizing of district energy systems is one the present challenges in developing district energy systems [@mahmoud2020recent], especially with lack of open-source frameworks related to district energy systems [@klemm2021modeling]. Therefore, a framwork that can help with downloading weather data, generating scenarios to consider uncertainties, and optimization of sizing is necessary in this field. 
+Optimizating sizing of district energy systems is one the present challenges in developing district energy systems [@mahmoud2020recent], especially with the lack of open-source frameworks in the energy research field [@klemm2021modeling]. Therefore, a framwork that can help with different stages of optimizing a district energy system is valuable. 
 research problem: 
 in the vast  and [@pfenninger2017importance]
 
