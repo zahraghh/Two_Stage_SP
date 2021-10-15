@@ -24,7 +24,7 @@ bibliography: paper.bib
 
 # Optional fields if submitting to a AAS journal too, see this blog post:
 # https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
-aas-doi: ... <- update this with the DOI from AAS once you know it.
+aas-doi: 10.31224/osf.io/hcnd6 <- update this with the DOI from AAS once you know it.
 aas-journal: ASME International Mechanical Engineering Congress and Exposition
 ---
 
@@ -38,7 +38,7 @@ A user can change the case study's location, modify the energy components' chara
 # Statement of need
 research problem: in the vast [@klemm2021modeling] and [@pfenninger2017importance]
 
-real world problem: helping facility managers
+real world problem: helping facility managers 
 
 
 
