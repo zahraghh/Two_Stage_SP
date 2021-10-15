@@ -33,33 +33,18 @@ Two_stage_SP package optimizes the sizing of energy components for a district en
 
 This framework has four main sections. In the first section, actual weather data from National Solar Radiation Database (NSRDB) is downloaded. Global tilted irradiance is quantified per unit of a tilted flat plate, representing solar photovoltaic arrays. In the second section, uncertainties in energy demands, solar irradiance, wind speed, and electricity emissions are considered by generating new scenarios with different values of energy demands, solar irradiance, wind speed, and electricity emissions. In the third section, the k-medoid clustering algorithm is used to reduce the number of scenarios to a selected number defined by the user by removing similar scenarios. In the fourth section, the two-stage stochastic programming is performed by utilizing the nondominated sorting genetic algorithm II (NSGA-II) algorithm in the first stage and the public GNU Linear Programming Kit (GLPK) solver in the second stage. The objectives are to minimize the total cost (investment, operation & maintenance, and operating cost) and operating CO<sub>2</sub> emissions.
 
-A user can change the case study's location, modify the energy components' characteristics, change the energy configuration, and/or change the district energy system's charectrsitics. 
+A user can change the case study's location, edit energy demands of buildings, modify the energy components' characteristics, change the energy configuration, and/or change the district energy system's charectrsitics. 
 
 # Statement of need
-research problem: in the vast [@klemm2021modeling] and [@pfenninger2017importance]
+Optimizating sizing of district energy systems is one the present challenges in developing district energy systems [@mahmoud2020recent], especially with lack of open-source frameworks related to district energy systems [@klemm2021modeling]. Therefore, a framwork that can help with downloading weather data, generating scenarios to consider uncertainties, and optimization of sizing is necessary in this field. 
+research problem: 
+in the vast  and [@pfenninger2017importance]
 
 real world problem: helping facility managers 
 
 
 
-# Citations
-
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
-
-
-# Figures
-
-Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
-
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% }
-
 # Acknowledgements
 
-We acknowledge contributions from ...
 
 # Reference
